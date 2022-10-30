@@ -1,4 +1,4 @@
-package com.esprit.examen.entities.DTO;
+package com.esprit.examen.entities.dto;
 
 import com.esprit.examen.entities.Facture;
 import lombok.Getter;

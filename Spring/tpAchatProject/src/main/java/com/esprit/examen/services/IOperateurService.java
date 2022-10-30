@@ -2,7 +2,7 @@ package com.esprit.examen.services;
 
 import java.util.List;
 
-import com.esprit.examen.entities.DTO.OperateurDTO;
+import com.esprit.examen.entities.dto.OperateurDTO;
 import com.esprit.examen.entities.Operateur;
 
 
