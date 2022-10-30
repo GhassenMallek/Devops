@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout GIT') {
             steps {
-                echo 'Pulling...';
+                echo 'Pulling..';
                 git branch: 'Melek',
                 url : 'https://github.com/MGhassen30798/Devops';
             }
