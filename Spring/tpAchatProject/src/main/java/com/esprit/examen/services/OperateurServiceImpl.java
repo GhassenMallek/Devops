@@ -19,30 +19,15 @@ public class OperateurServiceImpl implements IOperateurService {
 	}
 
 	@Override
-	public Operateur addOperateur(OperateurDTO o) {
-		return operateurRepository.save(Operateur.builder()
-				.factures(o.getFactures())
-				.nom(o.getNom())
-				.password(o.getPassword())
-				.prenom(o.getPrenom())
-				.build());
-	}
+	public Operateur addOperateur(OperateurDTO o) {return operateurRepository.save(Operateur.builder().factures(o.getFactures()).nom(o.getNom()).password(o.getPassword()).prenom(o.getPrenom()).build());}
 
 	@Override
-	public void deleteOperateur(Long id) {
-		operateurRepository.deleteById(id);
-		
-	}
+	public void deleteOperateur(Long id) {operateurRepository.deleteById(id);}
 
 	@Override
-	public Operateur updateOperateur(Operateur o) {
-		operateurRepository.save(o);
-		return o;
-	}
+	public Operateur updateOperateur(Operateur o) {return operateurRepository.save(o);}
 
 	@Override
-	public Operateur retrieveOperateur(Long id) {
-		return operateurRepository.findById(id).orElse(null);
-	}
+	public Operateur retrieveOperateur(Long id) {return operateurRepository.findById(id).orElse(null);}
 
 }
