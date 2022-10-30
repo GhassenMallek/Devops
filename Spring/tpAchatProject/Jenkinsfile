@@ -11,21 +11,21 @@ pipeline {
           stage('MVN CLEAN') {
             steps {
                 dir('Spring/tpAchatProject') {
-                    sh 'mvn clean';
+                    sh """mvn clean""";
                 }
             }
         }
           stage('MVN COMPILE') {
             steps {
                 dir('Spring/tpAchatProject') {
-                    sh 'mvn compile';
+                    sh """mvn compile""";
                 }
             }
         }
         stage('Sonar'){
             steps{
                  dir('Spring/tpAchatProject') {
-                  sh 'mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2';
+                  sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2""";
                 }
             }
         }
