@@ -2,6 +2,7 @@ package com.esprit.examen.controllers;
 
 import java.util.List;
 
+import com.esprit.examen.entities.DTO.OperateurDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.examen.entities.Operateur;
@@ -36,7 +37,7 @@ public class OperateurController {
 	// http://localhost:8089/SpringMVC/operateur/add-operateur
 	@PostMapping("/add-operateur")
 	@ResponseBody
-	public Operateur addOperateur(@RequestBody Operateur op) {
+	public Operateur addOperateur(@RequestBody OperateurDTO op) {
 		Operateur operateur = operateurService.addOperateur(op);
 		return operateur;
 	}
