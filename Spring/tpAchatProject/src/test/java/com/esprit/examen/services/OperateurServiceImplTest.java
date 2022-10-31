@@ -38,8 +38,8 @@ public class OperateurServiceImplTest {
                 .build();
         Mockito.when(operateurRepository.save(operateur)).thenReturn(operateur);
         Operateur operateur1 = operateurService.addOperateur(operateur.toOperateurDTO());
-        List<Operateur> operateur2 = operateurService.retrieveAllOperateurs();
-        Assertions.assertThat("nom").isEqualTo("nom");
+        //List<Operateur> operateur2 = operateurService.retrieveAllOperateurs();
+        Assertions.assertThat(operateur1.getNom()).isEqualTo("nom");
         Mockito.verify(operateurRepository).save(operateur);
     }
 
