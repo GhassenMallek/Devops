@@ -22,7 +22,7 @@ public class OperateurServiceImpl implements IOperateurService {
 	@Override
 	public Operateur addOperateur(OperateurDTO o) {
         return operateurRepository.save(Operateur.builder()
-                .factures(o.getFactures())
+                //.factures(o.getFactures())
                 .nom(o.getNom())
                 .password(o.getPassword())
                 .prenom(o.getPrenom())
