@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout GIT') {
+            steps {
+                echo 'Pulling..';
+                git branch: 'Rami',
+                url : 'https://github.com/MGhassen30798/Devops';
+            }
+        }
+          stage('MVN CLEAN') {
+            steps {
+                dir('Spring/tpAchatProject') {
+                    sh """mvn clean""";
+                }
+            }
+        }
+          stage('MVN COMPILE') {
+            steps {
+                dir('Spring/tpAchatProject') {
+                    sh """mvn compile""";
+                }
+            }
+        }
+        stage('Sonar'){
+            steps{
+                 dir('Spring/tpAchatProject') {
+                  sh """mvn -X sonar:sonar -Dsonar.projectKey=Devops   -Dsonar.host.url=http://172.10.0.140:9000   -Dsonar.login=ea96877b517f2d64cac44ae883595fe84b2f3071""";
+                }
+            }
+        }
+    }
+}

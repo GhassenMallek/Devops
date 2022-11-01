@@ -1,7 +1,9 @@
-/*package com.esprit.examen.services;
+package com.esprit.examen.services;
 
 import static org.junit.Assert.*;
 import java.util.List;
+
+import com.esprit.examen.entities.dto.StockDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class StockServiceImplTest {
 	public void testAddStock() {
 	//	List<Stock> stocks = stockService.retrieveAllStocks();
 	//	int expected=stocks.size();
-		Stock s = new Stock("stock test",10,100);
+		StockDTO s = new StockDTO("stock test",10,100);
 		Stock savedStock= stockService.addStock(s);
 		
 	//	assertEquals(expected+1, stockService.retrieveAllStocks().size());
@@ -31,7 +33,7 @@ public class StockServiceImplTest {
 	@Test
 	public void testAddStockOptimized() {
 
-		Stock s = new Stock("stock test",10,100);
+		StockDTO s = new StockDTO("stock test",10,100);
 		Stock savedStock= stockService.addStock(s);
 		assertNotNull(savedStock.getIdStock());
 		assertSame(10, savedStock.getQte());
@@ -42,11 +44,10 @@ public class StockServiceImplTest {
 	
 	@Test
 	public void testDeleteStock() {
-		Stock s = new Stock("stock test",30,60);
+		StockDTO s = new StockDTO("stock test",30,60);
 		Stock savedStock= stockService.addStock(s);
 		stockService.deleteStock(savedStock.getIdStock());
 		assertNull(stockService.retrieveStock(savedStock.getIdStock()));
 	}
 
 }
-*/
