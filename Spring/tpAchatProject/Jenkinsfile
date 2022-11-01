@@ -12,35 +12,35 @@ pipeline {
         stage("Maven Clean") {
             steps {
                 script {
-                    sh "mvn -f'Spring/pom.xml' clean -DskipTests=true"
+                    sh "mvn -f'Spring/tpAchatProject/pom.xml' clean -DskipTests=true"
                 }
             }
         }
         stage("Maven Compile") {
             steps {
                 script {
-                    sh "mvn -f'Spring/pom.xml' compile -DskipTests=true"
+                    sh "mvn -f'Spring/tpAchatProject/pom.xml' compile -DskipTests=true"
                 }
             }
         }
         stage("Maven Sonarqube") {
             steps {
                 script {
-                    sh "mvn -f'Spring/pom.xml' sonar:sonar -Dsonar.login=admin -Dsonar.password=Admin"
+                    sh "mvn -f'Spring/tpAchatProject/pom.xml' sonar:sonar -Dsonar.login=admin -Dsonar.password=Admin"
                 }
             }
         }
         stage("Maven Build") {
             steps {
                 script {
-                    sh "mvn -f'Spring/pom.xml' package -DskipTests=true"
+                    sh "mvn -f'Spring/tpAchatProject/pom.xml' package -DskipTests=true"
                 }
             }
         }
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
-                    pom = readMavenPom file: "Spring/pom.xml";
+                    pom = readMavenPom file: "Spring/tpAchatProject/pom.xml";
                     filesByGlob = findFiles(glob: "Spring/target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
