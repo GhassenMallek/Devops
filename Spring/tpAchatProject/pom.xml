@@ -20,9 +20,8 @@
 		<sonar.tests>${project.basedir}/src/test/</sonar.tests>
 		<jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-			<sonar.coverage.jacoco.xmlReportPaths>
-				${project.basedir}/target/site/jacoco/jacoco.xml
-			</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+
 	</properties>
 	<dependencies>
 		<dependency>
