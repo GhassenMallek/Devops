@@ -25,7 +25,7 @@ pipeline {
         stage('Sonar'){
             steps{
                  dir('Spring/tpAchatProject') {
-                  sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2""";
+                  sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2 -Dsonar.jacoco.reportPath=build/target/site/jacoco/jacoco.xml""";
                 }
             }
         }
