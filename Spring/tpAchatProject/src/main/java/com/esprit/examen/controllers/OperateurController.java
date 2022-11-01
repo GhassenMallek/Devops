@@ -38,7 +38,8 @@ public class OperateurController {
 	@PostMapping("/add-operateur")
 	@ResponseBody
 	public Operateur addOperateur(@RequestBody OperateurDTO op) {
-		return operateurService.addOperateur(op);
+		Operateur o= operateurService.addOperateur(op);
+		return o;
 	}
 
 	// http://localhost:8089/SpringMVC/operateur/remove-operateur/{operateur-id}

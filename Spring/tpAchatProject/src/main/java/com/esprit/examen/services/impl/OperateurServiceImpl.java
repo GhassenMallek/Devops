@@ -21,12 +21,13 @@ public class OperateurServiceImpl implements IOperateurService {
 
 	@Override
 	public Operateur addOperateur(OperateurDTO o) {
-        return operateurRepository.save(Operateur.builder()
-                //.factures(o.getFactures())
-                .nom(o.getNom())
-                .password(o.getPassword())
-                .prenom(o.getPrenom())
-                .build());
+		Operateur op =Operateur.builder()
+				//.factures(o.getFactures())
+				.nom(o.getNom())
+				.password(o.getPassword())
+				.prenom(o.getPrenom())
+				.build();
+		return operateurRepository.save(op);
     }
 
 	@Override

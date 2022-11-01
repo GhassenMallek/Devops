@@ -8,14 +8,21 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class OperateurServiceImplTest {
     @Mock
@@ -36,11 +43,11 @@ public class OperateurServiceImplTest {
                 .password("password")
                 .prenom("prenom")
                 .build();
-        Mockito.when(operateurRepository.save(operateur)).thenReturn(operateur);
+        Mockito.when(operateurRepository.save(any(Operateur.class))).thenReturn(operateur);
         Operateur operateur1 = operateurService.addOperateur(operateur.toOperateurDTO());
-        //List<Operateur> operateur2 = operateurService.retrieveAllOperateurs();
+
         Assertions.assertThat(operateur1.getNom()).isEqualTo("nom");
-        Mockito.verify(operateurRepository).save(operateur);
+        Mockito.verify(operateurRepository).save(any(Operateur.class));
     }
 
 //    @Test
