@@ -62,7 +62,7 @@ pipeline {
                                 type: pom.packaging],
                                 [artifactId: pom.artifactId,
                                 classifier: '',
-                                file: "Spring/pom.xml",
+                                file: "Spring/tpAchatProject/pom.xml",
                                 type: "pom"]
                             ]
                         );
