@@ -4,6 +4,7 @@ import com.esprit.examen.entities.Produit;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.Set;
 
 @Getter
@@ -14,5 +15,6 @@ public class StockDTO {
 	private Integer qte;
 	private Integer qteMin;
 	private Set<Produit> produits;
+
 
 }
