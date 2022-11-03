@@ -21,8 +21,6 @@ C
 tpAchatProject/.env,f\d\fd574fcc993467d4646546eab3e89bbbc3c743c6
 G
 tpAchatProject/mvnw.cmd,9\f\9ff482e5dd2bea01c1be12882c477c4ea80cbf13
-I
-tpAchatProject/Dockerfile,d\6\d6a310371a59b01722ac8d9533e4d7c1cefb6950
 }
 MtpAchatProject/src/main/java/com/esprit/examen/TpAchatProjectApplication.java,c\5\c58fa2180163adf04ed37a47e5c9537cb6b89753
 z
@@ -115,5 +113,3 @@ PtpAchatProject/src/main/java/com/esprit/examen/repositories/StockRepository.jav
 MtpAchatProject/src/main/java/com/esprit/examen/services/StockServiceImpl.java,b\2\b2e9b0c49f4bdfad7ac97bc015ee0e597ad47c3e
 r
 BtpAchatProject/src/main/java/com/esprit/examen/entities/Stock.java,c\b\cb2fea03f7e29cf2c5a65e840c20453e966fa471
-J
-tpAchatProject/Jenkinsfile,8\e\8e1babf55cb8267f9760fc81976992d35d136036
