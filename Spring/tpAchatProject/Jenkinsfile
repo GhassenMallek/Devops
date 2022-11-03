@@ -15,6 +15,13 @@ pipeline {
                 url : 'https://github.com/MGhassen30798/Devops';
             }
         }
+        stage('Verif MVN') {
+                    steps {
+                        dir('Spring/tpAchatProject') {
+                            sh """mvn -v""";
+                        }
+                    }
+                }
           stage('MVN CLEAN') {
             steps {
                 dir('Spring/tpAchatProject') {

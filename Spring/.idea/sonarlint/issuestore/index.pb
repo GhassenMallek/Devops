@@ -5,8 +5,6 @@ RtpAchatProject/src/main/java/com/esprit/examen/repositories/ProduitRepository.j
 TtpAchatProject/src/main/java/com/esprit/examen/repositories/ReglementRepository.java,b\2\b264899e9952ba216ae7a237e3a0522b9e7bfcb9
 Œ
 \tpAchatProject/src/main/java/com/esprit/examen/repositories/DetailFournisseurRepository.java,1\8\1820849dec7d20949e779f194957b04c7d10cfee
-h
-8tpAchatProject/src/main/resources/application.properties,7\f\7f25ecfd2557e4e4d736f4757181f731680060e0
 d
 4tpAchatProject/.mvn/wrapper/maven-wrapper.properties,e\f\efc3188c839640cee5f72c388ab41cc7385dfc92
 g
@@ -101,15 +99,9 @@ UtpAchatProject/src/main/java/com/esprit/examen/controllers/ProduitRestControlle
 WtpAchatProject/src/main/java/com/esprit/examen/controllers/ReglementRestController.java,9\5\9508cf61cc539d47625f7bcf93bab8cbef983116
 y
 ItpAchatProject/src/main/java/com/esprit/examen/entities/dto/StockDTO.java,b\7\b7f990606a46df15767bae01223651d860c71091
-z
-JtpAchatProject/src/main/java/com/esprit/examen/services/IStockService.java,f\c\fc789a6b5b87a2c4e38669cb09c53b04d41f1dbd
-ƒ
-StpAchatProject/src/main/java/com/esprit/examen/controllers/StockRestController.java,1\8\1883d65f3dd13d1f4ed385b9483ea33fba6bf5d6
 ‚
 RtpAchatProject/src/test/java/com/esprit/examen/services/ClientServiceImplTest.java,0\5\05eb35e350ef20d5915c186d67c7b1f37a96ffcb
 €
 PtpAchatProject/src/main/java/com/esprit/examen/repositories/StockRepository.java,3\e\3e956509e545f734bff006fd012c2b3d4c73992c
-}
-MtpAchatProject/src/main/java/com/esprit/examen/services/StockServiceImpl.java,b\2\b2e9b0c49f4bdfad7ac97bc015ee0e597ad47c3e
-r
-BtpAchatProject/src/main/java/com/esprit/examen/entities/Stock.java,c\b\cb2fea03f7e29cf2c5a65e840c20453e966fa471
+I
+tpAchatProject/Dockerfile,d\6\d6a310371a59b01722ac8d9533e4d7c1cefb6950
