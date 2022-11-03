@@ -11,7 +11,7 @@ pipeline {
           stage('MVN CLEAN') {
             steps {
                 dir('Spring/tpAchatProject') {
-                    sh """mvn clean""";
+                    sh """mvn clean install""";
                 }
             }
         }
