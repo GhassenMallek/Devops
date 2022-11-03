@@ -15,6 +15,14 @@ pipeline {
                 }
             }
         }
+          stage('checking mvn version and java') {
+            steps {
+                dir('Spring/tpAchatProject') {
+                    sh """mvn -v """;
+                    sh """java --version""";
+                }
+            }
+        }
           stage('MVN COMPILE') {
             steps {
                 dir('Spring/tpAchatProject') {
@@ -32,7 +40,7 @@ pipeline {
         stage('Sonar'){
             steps{
                  dir('Spring/tpAchatProject') {
-                  sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2 -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml""";
+                  sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2""";
                 }
             }
         }
