@@ -12,6 +12,7 @@ pipeline {
                     steps {
                         dir('Spring/tpAchatProject') {
                             sh """mvn -v """;
+                            sh """echo $M2_HOME""";
                             sh """java --version""";
                         }
                     }
