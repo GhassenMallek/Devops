@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment{
+            PATH = "$PATH:/usr/share/maven/bin"
+        }
     stages {
         stage('Checkout GIT') {
             steps {
@@ -37,5 +40,38 @@ pipeline {
                 }
             }
         }
+        stage("Building Docker Image") {
+               steps{
+                     sh 'docker build -t mohamedmmc/tpachat .'
+                       }
+                }
+        tage("Login to DockerHub") {
+                steps{
+                             sh 'docker login -u mohamedmmc -p azerty123'
+                        }
+                }
+                stage("Push to DockerHub") {
+                        steps{
+                             sh 'docker push mohamedmmc/tpachat'
+                        }
+                }
+
+                       stage("Docker-compose") {
+                        steps{
+                            sh 'docker-compose up -d'
+                        }
+                }
+            }
+
+            post {
+                        success {
+                           echo 'succes'
+                        }
+        failure {
+                          echo 'failed'
+                        }
+
+
+            }
     }
 }
