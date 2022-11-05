@@ -1,63 +1,45 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout GIT') {
-            steps {
-                echo 'Pulling..';
-                git branch: 'Melek',
-                url : 'https://github.com/MGhassen30798/Devops';
-            }
-        }
-          stage('MVN CLEAN') {
-            steps {
-                dir('Spring/tpAchatProject') {
-                    sh """mvn clean install""";
+          stage('Checkout GIT') {
+                    steps {
+                        echo 'Pulling..';
+                        git branch: 'Melek',
+                        url : 'https://github.com/MGhassen30798/Devops';
+                    }
                 }
-            }
-        }
-
-          stage('MVN COMPILE') {
-            steps {
-                dir('Spring/tpAchatProject') {
-                    sh """mvn compile""";
+                stage('MVN CLEAN') {
+                    steps {
+                        dir('Spring/tpAchatProject') {
+                            sh """mvn clean install""";
+                        }
+                    }
                 }
-            }
-        }
-         stage('MVN TEST') {
+                stage('MVN COMPILE') {
+                    steps {
+                        dir('Spring/tpAchatProject') {
+                            sh """mvn compile""";
+                        }
+                    }
+                }
+                stage('MVN TEST') {
                     steps {
                         dir('Spring/tpAchatProject') {
                             sh """mvn test""";
                         }
                     }
                 }
-        stage('Sonar'){
-            steps{
-                 dir('Spring/tpAchatProject') {
-                  sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2""";
-                }
-            }
-        }
-        stage("Building Docker Image") {
-               steps{
-                     sh 'docker build -t mohamedmmc/tpachat .'
-                       }
-                }
-        tage("Login to DockerHub") {
-                steps{
-                             sh 'docker login -u mohamedmmc -p azerty123'
+                stage('Sonar'){
+                    steps{
+                        dir('Spring/tpAchatProject') {
+                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2""";
                         }
+                    }
                 }
-                stage("Push to DockerHub") {
-                        steps{
-                             sh 'docker push mohamedmmc/tpachat'
-                        }
-                }
-
-                       stage("Docker-compose") {
-                        steps{
-                            sh 'docker-compose up -d'
-                        }
-                }
-            }
+          }
     }
+
+
+
+
 
