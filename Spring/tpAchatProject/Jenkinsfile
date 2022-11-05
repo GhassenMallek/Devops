@@ -3,29 +3,29 @@ pipeline {
     stages {
                 stage('Checkout GIT') {
                     steps {
-                        echo 'Pulling..';
+                        echo 'Pulling..'
                         git branch: 'Melek',
-                        url : 'https://github.com/MGhassen30798/Devops';
+                        url : 'https://github.com/MGhassen30798/Devops'
                     }
                 }
                 stage('MVN CLEAN') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn clean install""";
+                            sh """mvn clean install"""
                         }
                     }
                 }
                 stage('MVN COMPILE') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn compile""";
+                            sh """mvn compile"""
                         }
                     }
                 }
                 stage('MVN TEST') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn test""";
+                            sh """mvn test"""
                         }
                     }
                 }
@@ -36,7 +36,13 @@ pipeline {
                         }
                     }
                 }
-
+                stage('Building Docker Image') {
+                                    dir('Spring/tpAchatProject') {
+                                        steps{
+                                            sh 'docker build -t mohamedmmc/tpachat .'
+                                        }
+                                    }
+                                }
           }
     }
 
