@@ -11,6 +11,7 @@ pipeline {
                 stage('MVN CLEAN') {
                     steps {
                         dir('Spring/tpAchatProject') {
+                            sh """grep docker /etc/group"""
                             sh """mvn clean install"""
                         }
                     }
