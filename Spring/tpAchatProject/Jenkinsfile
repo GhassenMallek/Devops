@@ -12,7 +12,6 @@ pipeline {
                     steps {
                         dir('Spring/tpAchatProject') {
                             sh """mvn clean install"""
-                            sh """sh 'sudo chmod 666 /var/run/docker.sock'"""
                         }
                     }
                 }
