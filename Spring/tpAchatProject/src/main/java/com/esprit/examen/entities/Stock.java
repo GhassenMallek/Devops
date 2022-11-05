@@ -32,6 +32,7 @@ public class Stock implements Serializable {
 	private Set<Produit> produits;
 	public StockDTO toStockDto() {
 		return StockDTO.builder()
+				.idStock(this.idStock)
 				.libelleStock(this.libelleStock)
 				.qte(this.qte)
 				.qteMin(this.qteMin)
