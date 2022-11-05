@@ -38,6 +38,11 @@ pipeline {
                 }
                                 stage('Building Docker Image') {
                                     steps {
+                                        dir('/var/run/'){
+                                            sh 'ls -l'
+                                            sh 'sudo chmod 666 /var/run/docker.sock'
+                                            sh 'ls -l'
+                                        }
                                         dir('Spring/tpAchatProject'){
                                             sh 'docker build -t mohamedmmc/tpachat .'
                                         }
