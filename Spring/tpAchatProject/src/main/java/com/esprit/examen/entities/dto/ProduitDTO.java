@@ -29,8 +29,4 @@ public class ProduitDTO {
 	private Set<DetailFacture> detailFacture;
 	private CategorieProduit categorieProduit;
 	
-
-
-	
-
 }
