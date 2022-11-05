@@ -8,14 +8,6 @@ pipeline {
                 url : 'https://github.com/MGhassen30798/Devops';
             }
         }
-         stage('checking mvn version and java') {
-                    steps {
-                        dir('Spring/tpAchatProject') {
-                            sh """mvn -v """;
-                            sh """java --version""";
-                        }
-                    }
-                }
           stage('MVN CLEAN') {
             steps {
                 dir('Spring/tpAchatProject') {
