@@ -91,8 +91,8 @@ public class ReglementServiceImplTest {
 		assertNotNull(Reglements);
 	}
 	
-	@Test
-	public void retrieveReglementByFacture() {
+//	@Test
+//	public void retrieveReglementByFacture() {
 //		init();
 //		when(reglementRepository.save(any(Reglement.class))).thenReturn(r1);
 //		ReglementDTO prm=modelMapper.map(r1, ReglementDTO.class);
@@ -101,12 +101,12 @@ public class ReglementServiceImplTest {
 //		Produit existingReglement = reglementServiceImpl.retrieveReglementByFacture(pnew.getFacture());
 //		assertNotNull(existingReglement);
 //		assertThat(existingReglement.getIdProduit()).isNotNull();
-	}
+//	}
 //	
-	@Test
-	public void getChiffreAffaireEntreDeuxDate() {
+//	@Test
+//	public void getChiffreAffaireEntreDeuxDate() {
 //		init();
-//		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
+//		when(reglementRepository.findById(anyLong())).thenReturn(Optional.of(r1));
 //		
 //		when(produitRepository.save(any(Produit.class))).thenReturn(p1);
 //		p1.setLibelleProduit("Fantacy");
@@ -115,16 +115,6 @@ public class ReglementServiceImplTest {
 //		
 //		assertNotNull(exisitingProduit);
 //		assertEquals("Fantacy", exisitingProduit.getLibelleProduit());
-	}
-//	
-//	@Test
-//	public void deleteProduit() {
-//		init();
-//		Long ProduitId = 1L;
-//		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
-//		doNothing().when(produitRepository).deleteById(anyLong());
-//		produitService.deleteProduit(ProduitId);
-//		verify(produitRepository, times(1)).deleteById(anyLong());
-//		
 //	}
+
 }
