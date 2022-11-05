@@ -36,28 +36,28 @@ pipeline {
                         }
                     }
                 }
-                stage("Building Docker Image") {
+                stage('Building Docker Image') {
                     dir('Spring/tpAchatProject') {
                         steps{
                             sh 'docker build -t mohamedmmc/tpachat .'
                         }
                     }
                 }
-                stage("Login to DockerHub") {
+                stage('Login to DockerHub') {
                     dir('Spring/tpAchatProject'){
                         steps{
                             sh 'docker login -u mohamedmmc -p azerty123'
                         }
                     }
                 }
-                stage("Push to DockerHub") {
+                stage('Push to DockerHub') {
                     dir('Spring/tpAchatProject'){
                         steps{
                             sh 'docker push mohamedmmc/tpachat'
                         }
                     }
                 }
-                stage("docker-compose"){
+                stage('docker-compose'){
                     dir('Spring/tpAchatProject'){
                         steps{
                             sh 'docker-compose up -d'
