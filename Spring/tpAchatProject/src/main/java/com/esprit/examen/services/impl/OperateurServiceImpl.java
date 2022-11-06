@@ -34,7 +34,13 @@ public class OperateurServiceImpl implements IOperateurService {
 	public void deleteOperateur(Long id) {operateurRepository.deleteById(id);}
 
 	@Override
-	public Operateur updateOperateur(Operateur o) {return operateurRepository.save(o);}
+	public Operateur updateOperateur(OperateurDTO o) {return operateurRepository.save(Operateur.builder()
+			.idOperateur(o.getIdOperateur())
+			.nom(o.getNom())
+			.prenom(o.getPrenom())
+			.password(o.getPassword())
+			.factures(o.getFactures())
+			.build());}
 
 	@Override
 	public Operateur retrieveOperateur(Long id) {return operateurRepository.findById(id).orElse(null);}

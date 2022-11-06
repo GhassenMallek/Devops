@@ -14,7 +14,7 @@ public interface IOperateurService {
 
 	void deleteOperateur(Long id);
 
-	Operateur updateOperateur(Operateur o);
+	Operateur updateOperateur(OperateurDTO o);
 
 	Operateur retrieveOperateur(Long id);
 
