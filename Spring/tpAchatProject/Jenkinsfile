@@ -1,6 +1,6 @@
-pipeline {
-    agent any
-    stages {
+        pipeline {
+            agent any
+            stages {
                 stage('Checkout GIT') {
                     steps {
                         echo 'Pulling..'
@@ -8,21 +8,21 @@ pipeline {
                         url : 'https://github.com/MGhassen30798/Devops'
                     }
                 }
-                stage('MVN CLEAN') {
+                stage('MVN Clean') {
                     steps {
                         dir('Spring/tpAchatProject') {
                             sh """mvn clean install"""
                         }
                     }
                 }
-                stage('MVN COMPILE') {
+                stage('MVN Compile') {
                     steps {
                         dir('Spring/tpAchatProject') {
                             sh """mvn compile"""
                         }
                     }
                 }
-                stage('MVN TEST') {
+                stage('MVN Test') {
                     steps {
                         dir('Spring/tpAchatProject') {
                             sh """mvn test"""
@@ -30,12 +30,12 @@ pipeline {
                     }
                 }
                 stage('Nexus'){
-                                    steps{
-                                        dir('Spring/tpAchatProject') {
-                                            sh """mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.01 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://172.10.0.55:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"""
-                                        }
-                                    }
+                    steps{
+                        dir('Spring/tpAchatProject') {
+                            sh """mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.01 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://172.10.0.55:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"""
                                 }
+                            }
+                        }
                 stage('Sonar'){
                     steps{
                         dir('Spring/tpAchatProject') {
@@ -43,37 +43,36 @@ pipeline {
                         }
                     }
                 }
-
-                                stage('Building Docker Image') {
-                                    steps {
-                                        dir('Spring/tpAchatProject'){
-                                            sh 'docker build -t mohamedmmc/tpachat .'
-                                        }
-                                    }
+                stage('Building Docker Image') {
+                    steps {
+                        dir('Spring/tpAchatProject'){
+                            sh 'docker build -t mohamedmmc/tpachat .'
                                 }
-                                stage('Login to DockerHub') {
-                                    steps{
-                                        dir('Spring/tpAchatProject'){
-                                            sh 'docker login -u mohamedmmc -p azerty123'
-                                        }
-                                    }
-                                }
-                                stage('Push to DockerHub') {
-                                    steps{
-                                        dir('Spring/tpAchatProject'){
-                                            sh 'docker push mohamedmmc/tpachat'
-                                        }
-                                    }
-                                }
-                                stage('docker-compose'){
-                                    steps{
-                                        dir('Spring/tpAchatProject'){
-                                            sh 'docker-compose up -d'
-                                        }
-                                    }
-                                }
-          }
-    }
+                            }
+                        }
+                stage('Login to DockerHub') {
+                    steps{
+                        dir('Spring/tpAchatProject'){
+                            sh 'docker login -u mohamedmmc -p azerty123'
+                            }
+                        }
+                    }
+                stage('Push to DockerHub') {
+                    steps{
+                        dir('Spring/tpAchatProject'){
+                            sh 'docker push mohamedmmc/tpachat'
+                             }
+                        }
+                    }
+                stage('Docker Compose'){
+                    steps{
+                       dir('Spring/tpAchatProject'){
+                            sh 'docker-compose up -d'
+                            }
+                       }
+                    }
+                }
+            }
 
 
 
