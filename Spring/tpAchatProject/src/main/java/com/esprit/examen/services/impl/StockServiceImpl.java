@@ -3,8 +3,8 @@ package com.esprit.examen.services.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import com.esprit.examen.entities.dto.StockDTO;
+import com.esprit.examen.services.IStockService;
 import com.esprit.examen.services.IStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
