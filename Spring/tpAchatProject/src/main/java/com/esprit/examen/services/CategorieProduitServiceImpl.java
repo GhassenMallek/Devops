@@ -31,7 +31,6 @@ public class CategorieProduitServiceImpl implements ICategorieProduitService {
 	@Override
 	public void deleteCategorieProduit(Long id) {
 		categorieProduitRepository.deleteById(id);
-		
 	}
 
 	@Override
