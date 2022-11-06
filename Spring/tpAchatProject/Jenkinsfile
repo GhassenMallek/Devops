@@ -11,7 +11,6 @@ pipeline {
                 stage('MVN CLEAN') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """grep docker /etc/group"""
                             sh """mvn clean install"""
                         }
                     }
@@ -33,7 +32,7 @@ pipeline {
                 stage('Nexus'){
                                     steps{
                                         dir('Spring/tpAchatProject') {
-                                            sh """mvn deploy -DskipTests"""
+                                            sh """mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.01 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://172.10.0.55:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"""
                                         }
                                     }
                                 }
