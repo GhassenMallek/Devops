@@ -1,4 +1,4 @@
-        pipeline {
+b        pipeline {
             agent any
             stages {
                 stage('Checkout GIT') {
@@ -32,7 +32,7 @@
                 stage('Sonar'){
                     steps{
                         dir('Spring/tpAchatProject') {
-                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2"""
+                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=6a8dd042d6628449cd63479d5da3cbc4ec348a2f"""
                         }
                     }
                 }
@@ -46,21 +46,21 @@
                 stage('Building Docker Image') {
                     steps {
                         dir('Spring/tpAchatProject'){
-                            sh 'docker build -t mohamedmmc/tpachat .'
+                            sh 'docker build -t ramihb/tpachat .'
                                 }
                             }
                         }
                 stage('Login to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker login -u mohamedmmc -p azerty123'
+                            sh 'docker login -u ramihb -p Haboub98.'
                             }
                         }
                     }
                 stage('Push to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker push mohamedmmc/tpachat'
+                            sh 'docker push ramihb/tpachat'
                              }
                         }
                     }
