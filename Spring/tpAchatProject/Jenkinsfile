@@ -1,76 +1,104 @@
 pipeline {
     agent any
     environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "172.10.0.140:8081"
-        NEXUS_REPOSITORY = "maven-releases"
-        NEXUS_CREDENTIAL_ID = "Nexus-Creds"
-    }
+            NEXUS_VERSION = "nexus3"
+            NEXUS_PROTOCOL = "http"
+            NEXUS_URL = "172.10.0.140:8081"
+            NEXUS_REPOSITORY = "maven-releases"
+            NEXUS_CREDENTIAL_ID = "Nexus-Creds"
+        }
     stages {
-        
-        stage("Maven Clean") {
+        stage('Checkout GIT') {
             steps {
-                script {
-                    sh "mvn -f'Spring/tpAchatProject/pom.xml' clean -DskipTests=true"
-                }
+                echo 'Pulling..';
+                git branch: 'Rami',
+                url : 'https://github.com/MGhassen30798/Devops';
             }
         }
-        stage("Maven Compile") {
-            steps {
-                script {
-                    sh "mvn -f'Spring/tpAchatProject/pom.xml' compile -DskipTests=true"
-                }
-            }
-        }
-        stage("Maven Sonarqube") {
-            steps {
-                script {
-                    sh "mvn -f'Spring/tpAchatProject/pom.xml' sonar:sonar -Dsonar.login=admin -Dsonar.password=Admin"
-                }
-            }
-        }
-        stage("Maven Build") {
-            steps {
-                script {
-                    sh "mvn -f'Spring/tpAchatProject/pom.xml' package -DskipTests=true"
-                }
-            }
-        }
-        stage("Publish to Nexus Repository Manager") {
-            steps {
-                script {
-                    pom = readMavenPom file: "Spring/tpAchatProject/pom.xml";
-                    filesByGlob = findFiles(glob: "Spring/tpAchatProject/target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "Spring/tpAchatProject/pom.xml",
-                                type: "pom"]
-                            ]
-                        );
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
+        stage('Verif MVN') {
+                    steps {
+                        dir('Spring/tpAchatProject') {
+                            sh """mvn -v""";
+                        }
                     }
-                    }
+                }
+                stage('MVN COMPILE') {
+                            steps {
+                                dir('Spring/tpAchatProject') {
+                                    sh """mvn compile""";
+                                }
+                            }
+                        }
+          stage('MVN CLEAN') {
+            steps {
+                dir('Spring/tpAchatProject') {
+                    sh """mvn clean""";
+                }
             }
         }
-    }
-}
+        stage('MVN TEST') {
+             steps {
+                 dir('Spring/tpAchatProject') {
+                    sh """mvn test""";
+                 }
+             }
+        }
+        stage('MVN PACKAGE') {
+              steps {
+                     dir('Spring/tpAchatProject') {
+                        sh """mvn package""";
+                     }
+              }
+        }
+
+        stage('Sonar'){
+            steps{
+                 dir('Spring/tpAchatProject') {
+                  sh """mvn -X sonar:sonar -Dsonar.projectKey=Devops   -Dsonar.host.url=http://172.10.0.140:9000   -Dsonar.login=ea96877b517f2d64cac44ae883595fe84b2f3071""";
+                }
+            }
+        }
+      stage("Maven Build") {
+                  steps {
+                      script {
+                          sh "mvn -f'Spring/tpAchatProject/pom.xml' package -DskipTests=true"
+                      }
+                  }
+              }
+              stage("Publish to Nexus Repository Manager") {
+                  steps {
+                      script {
+                          pom = readMavenPom file: "Spring/tpAchatProject/pom.xml";
+                          filesByGlob = findFiles(glob: "Spring/tpAchatProject/target/*.${pom.packaging}");
+                          echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                          artifactPath = filesByGlob[0].path;
+                          artifactExists = fileExists artifactPath;
+                          if(artifactExists) {
+                              echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                              nexusArtifactUploader(
+                                  nexusVersion: NEXUS_VERSION,
+                                  protocol: NEXUS_PROTOCOL,
+                                  nexusUrl: NEXUS_URL,
+                                  groupId: pom.groupId,
+                                  version: pom.version,
+                                  repository: NEXUS_REPOSITORY,
+                                  credentialsId: NEXUS_CREDENTIAL_ID,
+                                  artifacts: [
+                                      [artifactId: pom.artifactId,
+                                      classifier: '',
+                                      file: artifactPath,
+                                      type: pom.packaging],
+                                      [artifactId: pom.artifactId,
+                                      classifier: '',
+                                      file: "Spring/tpAchatProject/pom.xml",
+                                      type: "pom"]
+                                  ]
+                              );
+                          } else {
+                              error "*** File: ${artifactPath}, could not be found";
+                          }
+                          }
+                  }
+              }
+          }
+      }
