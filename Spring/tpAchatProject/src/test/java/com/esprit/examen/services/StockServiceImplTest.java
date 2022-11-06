@@ -59,7 +59,7 @@ public class StockServiceImplTest {
 		StockDTO sdto = modelMapper.map(s1, StockDTO.class);
 		Stock snew = stockService.addStock(sdto);
 		assertNotNull(snew);
-		assertEquals(snew.getLibelleStock(),"Test 1");
+		assertEquals("Test 1", snew.getLibelleStock());
 	}
 
 	@Test
