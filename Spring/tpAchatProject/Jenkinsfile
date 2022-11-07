@@ -25,35 +25,35 @@
                 stage('Sonar'){
                     steps{
                         dir('Spring/tpAchatProject') {
-                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=d5d94f2474cec839dc4ed930b3732347fd2a3ae5"""
+                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=b6f79640b0ac197d18437f50ea41ed53f0f2b5c2"""
                         }
                     }
                 }
                 stage('Nexus'){
                     steps{
                         dir('Spring/tpAchatProject') {
-                            sh """mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.09 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://172.10.0.55:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"""
+                            sh """mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.012 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://172.10.0.55:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"""
                                 }
                             }
                         }
                 stage('Building Docker Image') {
                     steps {
                         dir('Spring/tpAchatProject'){
-                            sh 'docker build -t mounah/tpachat .'
+                            sh 'docker build -t mohamedmmc/tpachat .'
                                 }
                             }
                         }
                 stage('Login to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker login -u mounah -p mouna25499'
+                            sh 'docker login -u mohamedmmc -p azerty123'
                             }
                         }
                     }
                 stage('Push to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker push mounah/tpachat'
+                            sh 'docker push mohamedmmc/tpachat'
                              }
                         }
                     }
