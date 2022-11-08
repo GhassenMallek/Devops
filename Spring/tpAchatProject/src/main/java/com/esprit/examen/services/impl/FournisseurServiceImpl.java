@@ -2,9 +2,7 @@ package com.esprit.examen.services.impl;
 
 import java.util.Date;
 import java.util.List;
-
-import javax.transaction.Transactional;
-
+import com.esprit.examen.entities.dto.FournisseurDTO;
 import com.esprit.examen.services.IFournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,6 @@ import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.SecteurActivite;
 import com.esprit.examen.repositories.DetailFournisseurRepository;
 import com.esprit.examen.repositories.FournisseurRepository;
-import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.SecteurActiviteRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,13 +23,11 @@ public class FournisseurServiceImpl implements IFournisseurService {
 	@Autowired
 	DetailFournisseurRepository detailFournisseurRepository;
 	@Autowired
-	ProduitRepository produitRepository;
-	@Autowired
 	SecteurActiviteRepository secteurActiviteRepository;
 
 	@Override
 	public List<Fournisseur> retrieveAllFournisseurs() {
-		List<Fournisseur> fournisseurs = (List<Fournisseur>) fournisseurRepository.findAll();
+		List<Fournisseur> fournisseurs = fournisseurRepository.findAll();
 		for (Fournisseur fournisseur : fournisseurs) {
 			log.info(" fournisseur : " + fournisseur);
 		}
@@ -40,13 +35,19 @@ public class FournisseurServiceImpl implements IFournisseurService {
 	}
 
 
-	public Fournisseur addFournisseur(Fournisseur f /*Master*/) {
+	public Fournisseur addFournisseur(FournisseurDTO f) {
 		DetailFournisseur df= new DetailFournisseur();//Slave
 		df.setDateDebutCollaboration(new Date()); //util
-		//On affecte le "Slave" au "Master"
-		f.setDetailFournisseur(df);	
-		fournisseurRepository.save(f);
-		return f;
+		f.setDetailFournisseur(df);
+		return fournisseurRepository.save(Fournisseur.builder()
+				.idFournisseur(f.getIdFournisseur())
+				.code(f.getCode())
+				.libelle(f.getLibelle())
+				.categorieFournisseur(f.getCategorieFournisseur())
+				.factures(f.getFactures())
+				.secteurActivites(f.getSecteurActivites())
+				.detailFournisseur(f.getDetailFournisseur())
+				.build());
 	}
 	
 	private DetailFournisseur  saveDetailFournisseur(Fournisseur f){
@@ -55,11 +56,19 @@ public class FournisseurServiceImpl implements IFournisseurService {
 		return df;
 	}
 
-	public Fournisseur updateFournisseur(Fournisseur f) {
-		DetailFournisseur df = saveDetailFournisseur(f);
-		f.setDetailFournisseur(df);	
-		fournisseurRepository.save(f);
-		return f;
+	public Fournisseur updateFournisseur(FournisseurDTO f) {
+		Fournisseur ff = Fournisseur.builder()
+				.idFournisseur(f.getIdFournisseur())
+				.code(f.getCode())
+				.libelle(f.getLibelle())
+				.categorieFournisseur(f.getCategorieFournisseur())
+				.factures(f.getFactures())
+				.secteurActivites(f.getSecteurActivites())
+				.detailFournisseur(f.getDetailFournisseur())
+				.build();
+		DetailFournisseur df = saveDetailFournisseur(ff);
+		ff.setDetailFournisseur(df);
+		return fournisseurRepository.save(ff);
 	}
 
 	@Override
@@ -70,19 +79,17 @@ public class FournisseurServiceImpl implements IFournisseurService {
 
 	@Override
 	public Fournisseur retrieveFournisseur(Long fournisseurId) {
-
-		Fournisseur fournisseur = fournisseurRepository.findById(fournisseurId).orElse(null);
-		return fournisseur;
+		return fournisseurRepository.findById(fournisseurId).orElse(null);
 	}
 
 	@Override
 	public void assignSecteurActiviteToFournisseur(Long idSecteurActivite, Long idFournisseur) {
 		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
-		SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite).orElse(null);
-        fournisseur.getSecteurActivites().add(secteurActivite);
-        fournisseurRepository.save(fournisseur);
-		
-		
+		if( fournisseur != null ){
+			SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite).orElse(null);
+			fournisseur.getSecteurActivites().add(secteurActivite);
+			fournisseurRepository.save(fournisseur);
+		}
 	}
 
 	
