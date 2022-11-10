@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout GIT') {
             steps {
                 echo 'Pulling..';
-                git branch: 'Rami',
+                git branch: 'Ghassen',
                 url : 'https://github.com/MGhassen30798/Devops';
             }
         }
