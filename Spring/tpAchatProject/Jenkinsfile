@@ -32,7 +32,7 @@
                 stage('Sonar'){
                     steps{
                         dir('Spring/tpAchatProject') {
-                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=6a8dd042d6628449cd63479d5da3cbc4ec348a2f"""
+                            sh """mvn sonar:sonar -Dsonar.projectKey=ghassen -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=e4688b6bdba8398b84fa7e94f008b20c340e18d5"""
                         }
                     }
                 }
