@@ -43,5 +43,34 @@
                                 }
                             }
                         }
+                        stage('Building Docker Image') {
+                    steps {
+                        dir('Spring/tpAchatProject'){
+                            sh 'docker build -t mghassen1998/tpachat .'
+                                }
+                            }
+                        }
+                stage('Login to DockerHub') {
+                    steps{
+                        dir('Spring/tpAchatProject'){
+                            sh 'docker login -u mghassen1998 -p Ghassen1998'
+                            }
+                        }
+                    }
+                stage('Push to DockerHub') {
+                    steps{
+                        dir('Spring/tpAchatProject'){
+                            sh 'docker push mghassen1998/tpachat'
+                             }
+                        }
+                    }
+                stage('Docker Compose'){
+                    steps{
+                       dir('Spring/tpAchatProject'){
+                            sh 'docker-compose up -d'
+                            }
+                       }
+                    }
+                }
                 }
             }
