@@ -27,6 +27,7 @@ import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.entities.dto.ProduitDTO;
 import com.esprit.examen.repositories.ProduitRepository;
+import com.esprit.examen.repositories.StockRepository;
 
 
 @RunWith(SpringRunner.class)
@@ -34,9 +35,14 @@ import com.esprit.examen.repositories.ProduitRepository;
 public class ProductServiceImplTest {
 	@Mock
 	private ProduitRepository produitRepository;
+	@Mock
+	private StockRepository stockrepository;
 
 	@InjectMocks
 	private ProduitServiceImpl produitService;
+	@InjectMocks
+	private StockServiceImpl stockServiceImpl;
+
 
 	private Produit p1;
 	private Produit p2;
