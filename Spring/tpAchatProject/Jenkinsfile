@@ -1,13 +1,7 @@
  pipeline {
             agent any
             stages {
-                stage('Checkout GIT') {
-                    steps {
-                        echo 'Pulling..'
-                        git branch: 'Ghassen',
-                        url : 'https://github.com/MGhassen30798/Devops'
-                    }
-                }
+            
                 stage('MVN Clean') {
                     steps {
                         dir('Spring/tpAchatProject') {
