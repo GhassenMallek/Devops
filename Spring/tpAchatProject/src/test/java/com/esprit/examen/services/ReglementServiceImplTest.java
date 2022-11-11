@@ -2,16 +2,12 @@ package com.esprit.examen.services;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,11 +20,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.Reglement;
-import com.esprit.examen.entities.dto.ProduitDTO;
 import com.esprit.examen.entities.dto.ReglementDTO;
-import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.ReglementRepository;
 
 @RunWith(SpringRunner.class)
@@ -102,7 +95,7 @@ public class ReglementServiceImplTest {
 		System.out.println("hello ghassef " + r2.getFacture().toString()+ " " + r3.getFacture().toString());
 		List<Reglement> Reglements = reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture());
 		System.out.println(reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture()));
-		
+		assertEquals(0,Reglements.size());
 	}
 //	
 //	@Test
