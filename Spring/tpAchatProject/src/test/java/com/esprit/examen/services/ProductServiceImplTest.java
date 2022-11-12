@@ -52,7 +52,7 @@ public class ProductServiceImplTest {
 	@BeforeEach
 	public void init() {
 		this.p1 = new Produit();
-		this.p1.setIdProduit(1L);
+		this.p1.setIdProduit(0L);
 		this.p1.setPrix(100);
 		this.p1.setLibelleProduit("test");
 		this.p2 = new Produit();
@@ -61,7 +61,7 @@ public class ProductServiceImplTest {
 		this.p2.setStock(s1);
 		this.p2.setLibelleProduit("test2");
 		this.s1 = new Stock();
-		this.s1.setIdStock(1L);
+		this.s1.setIdStock(0L);
 		this.s1.setQte(100);
 		this.s1.setLibelleStock("Stock 1");
 		this.modelMapper = new ModelMapper();
@@ -74,7 +74,7 @@ public class ProductServiceImplTest {
 		ProduitDTO prm=modelMapper.map(p1, ProduitDTO.class);
 		Produit pnew=produitService.addProduit(prm);
 		assertNotNull(pnew);
-		assertThat(pnew.getIdProduit()).isEqualTo(1L);
+		assertThat(pnew.getIdProduit()).isEqualTo(0L);
 	}
 
 	
@@ -116,24 +116,14 @@ public class ProductServiceImplTest {
 		assertEquals("Fantacy", exisitingProduit.getLibelleProduit());
 	}
 	@Test
-	public void assignProduitToStock() {
-		this.s1 = new Stock();
-		this.s1.setIdStock(5L);
-		this.s1.setLibelleStock("stocktest");
-		
-		this.p2 = new Produit();
-		this.p2.setIdProduit(2L);
-		this.p2.setStock(s1);
-		
-		this.modelMapper = new ModelMapper();
-		
+	public void assignProduitToStock() { 
+		init();
 		when(stockrepository.findById(anyLong())).thenReturn(Optional.of(s1));
-		Stock existingstock = stockServiceImpl.retrieveStock(s1.getIdStock());
-		assertNotNull(existingstock);
-		assertThat(existingstock.getIdStock()).isNotNull();
+		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
+		produitService.assignProduitToStock(p1.getIdProduit(), s1.getIdStock());
+		assertThat(p1.getStock().getIdStock()).isEqualTo(s1.getIdStock());
+
 		
-		produitService.assignProduitToStock(p2.getIdProduit(), p2.getStock().getIdStock());
-		assertEquals(p2.getStock().getIdStock(),s1.getIdStock());
 	}
 	
 	@Test
