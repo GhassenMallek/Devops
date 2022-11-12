@@ -3,6 +3,7 @@ package com.esprit.examen.services;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.entities.dto.StockDTO;
 import com.esprit.examen.repositories.StockRepository;
+import com.esprit.examen.services.impl.StockServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -58,7 +59,7 @@ public class StockServiceImplTest {
 		StockDTO sdto = modelMapper.map(s1, StockDTO.class);
 		Stock snew = stockService.addStock(sdto);
 		assertNotNull(snew);
-		assertEquals(snew.getLibelleStock(),"Test 1");
+		assertEquals("Test 1", snew.getLibelleStock());
 	}
 
 	@Test

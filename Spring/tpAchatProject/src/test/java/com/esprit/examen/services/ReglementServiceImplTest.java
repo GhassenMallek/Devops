@@ -3,11 +3,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+
+import static org.mockito.Mockito.verify;
+
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.esprit.examen.services.impl.ReglementServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +22,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 import com.esprit.examen.entities.Facture;
+
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.entities.dto.ReglementDTO;
 import com.esprit.examen.repositories.ReglementRepository;
