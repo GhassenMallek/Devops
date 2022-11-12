@@ -11,35 +11,35 @@
                 stage('MVN Clean') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn clean install"""
+                            sh """mvn clean install -Drevision=${env.BUILD_NUMBER}"""
                         }
                     }
                 }
                 stage('MVN Compile') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn compile"""
+                            sh """mvn compile -Drevision=${env.BUILD_NUMBER}"""
                         }
                     }
                 }
                 stage('MVN Test') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn test"""
+                            sh """mvn test -Drevision=${env.BUILD_NUMBER}"""
                         }
                     }
                 }
                 stage('Sonar'){
                     steps{
                         dir('Spring/tpAchatProject') {
-                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=6a8dd042d6628449cd63479d5da3cbc4ec348a2f"""
+                            sh """mvn -X sonar:sonar  -Dsonar.projectKey=project123 -Drevision=${env.BUILD_NUMBER} -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=6a8dd042d6628449cd63479d5da3cbc4ec348a2f"""
                         }
                     }
                 }
                 stage('Nexus'){
                     steps{
                         dir('Spring/tpAchatProject') {
-                            sh """mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://172.10.0.55:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"""
+                            sh """mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.${env.BUILD_NUMBER} -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://172.10.0.55:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1..${env.BUILD_NUMBER}.jar -Drevision=${env.BUILD_NUMBER}"""
                                 }
                             }
                         }
