@@ -51,9 +51,7 @@ public class FournisseurServiceImplTest {
         }
     };
     SecteurActivite sa = (SecteurActivite.builder().idSecteurActivite(5L).build());
-    List<SecteurActivite> ssa = new ArrayList<SecteurActivite>(){{
-      add(sa);
-    }};
+
 
     @Before
     public void init() {
@@ -64,7 +62,7 @@ public class FournisseurServiceImplTest {
     public void retrieveFournisseurTest(){
         Mockito.when(fournisseurRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(f1));
         Fournisseur f =fournisseurService.retrieveFournisseur(1L);
-        verify(fournisseurRepository).findById((Mockito.anyLong()));
+        verify(fournisseurRepository).findById(Mockito.anyLong());
         assertNotNull(f);
         log.info("get fournisseur : "+f.toString());
     }
@@ -79,21 +77,22 @@ public class FournisseurServiceImplTest {
     }
     @Test
     public void addFournisseurTest(){
-        Mockito.when(fournisseurRepository.save(Mockito.any())).thenReturn(f1);
+        Mockito.when(fournisseurRepository.save(Mockito.any(Fournisseur.class))).thenReturn(f1);
 
         Fournisseur f= fournisseurService.addFournisseur(f2.toFournisseurDTO());
         assertNotNull(f.getIdFournisseur());
-        verify(fournisseurRepository).save((Mockito.any()));
+        verify(fournisseurRepository).save((Mockito.any(Fournisseur.class)));
         log.info("get added fournisseur :"+ f.toString());
     }
+
     @Test
     public void updateFournisseurTest(){
-        Mockito.when(fournisseurRepository.save(Mockito.any())).thenReturn(f1);
+        Mockito.when(fournisseurRepository.save(Mockito.any(Fournisseur.class))).thenReturn(f1);
         f1.setLibelle("libelle");
         Fournisseur f = fournisseurService.updateFournisseur(f2.toFournisseurDTO());
         assertNotNull(f);
         assertEquals("libelle",f.getLibelle());
-        verify(fournisseurRepository).save(Mockito.any());
+        verify(fournisseurRepository).save(Mockito.any(Fournisseur.class));
         log.info("updated fournisseur :"+f.toString());
     }
     @Test
@@ -109,7 +108,7 @@ public class FournisseurServiceImplTest {
         Mockito.when(secteurActiviteRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(sa));
         fournisseurService.assignSecteurActiviteToFournisseur(5L,1L);
         assertTrue(f1.getSecteurActivites().contains(sa));
-        verify(fournisseurRepository).save(Mockito.any());
+        verify(fournisseurRepository).save(Mockito.any(Fournisseur.class));
         log.info("secteur activite assignd :"+f1.toString());
     }
 
