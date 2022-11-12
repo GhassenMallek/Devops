@@ -3,10 +3,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -95,6 +97,19 @@ public class ReglementServiceImplTest {
 		List<Reglement> Reglements = reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture());
 		System.out.println(reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture()));
 		assertEquals(0,Reglements.size());
+	}
+
+	@Test
+	public void retrieveReglement() {
+		init();
+		when(reglementRepository.save(any(Reglement.class))).thenReturn(r2);
+		ReglementDTO prm=modelMapper.map(r2, ReglementDTO.class);
+		Reglement pnew=reglementServiceImpl.addReglement(prm);
+		when(reglementRepository.findById(anyLong())).thenReturn(Optional.of(r2));
+		Reglement existingProduit = reglementServiceImpl.retrieveReglement(pnew.getIdReglement());
+		assertNotNull(existingProduit);
+		assertThat(existingProduit.getIdReglement()).isNotNull();
+
 	}
 //	
 //	@Test
