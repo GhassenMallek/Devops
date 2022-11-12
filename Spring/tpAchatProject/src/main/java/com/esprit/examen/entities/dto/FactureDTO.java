@@ -3,9 +3,7 @@ package com.esprit.examen.entities.dto;
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.Reglement;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FactureDTO implements Serializable {
     private float montantRemise;
     private float montantFacture;
