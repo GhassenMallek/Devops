@@ -1,16 +1,15 @@
 package com.esprit.examen.services;
 
-import com.esprit.examen.entities.CategorieFournisseur;
-import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.Fournisseur;
-import com.esprit.examen.entities.Operateur;
+import com.esprit.examen.entities.*;
 import com.esprit.examen.entities.dto.FactureDTO;
 import com.esprit.examen.repositories.FactureRepository;
 import com.esprit.examen.repositories.FournisseurRepository;
 import com.esprit.examen.repositories.OperateurRepository;
+import com.esprit.examen.repositories.ReglementRepository;
 import com.esprit.examen.services.impl.FactureServiceImpl;
 import com.esprit.examen.services.impl.FournisseurServiceImpl;
 import com.esprit.examen.services.impl.OperateurServiceImpl;
+import com.esprit.examen.services.impl.ReglementServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,11 +47,16 @@ public class FactureServiceImplTest {
     private FournisseurRepository fournisseurRepository;
     @InjectMocks
     private FournisseurServiceImpl fournisseurService;
+    @Mock
+    private ReglementRepository reglementRepository;
+    @InjectMocks
+    private ReglementServiceImpl reglementService;
 
     private Facture f1 ;
     private Facture f2 ;
     private Operateur o1;
     private Fournisseur fournisseur;
+    private Reglement reg;
     ModelMapper modelMapper;
 
     @BeforeEach
@@ -82,6 +86,10 @@ public class FactureServiceImplTest {
         this.fournisseur.setCode("code");
         this.fournisseur.setLibelle("libelle");
         this.fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+
+        this.reg = new Reglement();
+        this.reg.setMontantPaye(5.0f);
+        this.reg.setDateReglement(new Date(2022, 11, 12));
 
         this.modelMapper = new ModelMapper();
     }
@@ -161,8 +169,8 @@ public class FactureServiceImplTest {
     @DisplayName("Test Pourcentage Recouverment")
     public void testPourcentageRecouvrement() {
         init();
-        when(factureRepository.findById(0L)).thenReturn(Optional.of(f1));
-        when(factureRepository.findById(1L)).thenReturn(Optional.of(f2));
-        assertThat(f1.getDateCreationFacture()).isEqualTo(new Date(2022, 11, 12));
+        when(factureRepository.getTotalFacturesEntreDeuxDates(new Date(2022, 11, 11),new Date(2022, 11, 24))).thenReturn(8.0f);
+        when(reglementRepository.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).thenReturn(2.0f);
+        assertThat(factureService.pourcentageRecouvrement(new Date(2022, 11, 11),new Date(2022, 11, 24))).isEqualTo(25.0f);
     }
 }

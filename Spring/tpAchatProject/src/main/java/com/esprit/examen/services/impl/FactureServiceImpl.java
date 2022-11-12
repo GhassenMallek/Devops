@@ -28,6 +28,9 @@ public class FactureServiceImpl implements IFactureService {
 	@Autowired
 	ReglementServiceImpl reglementService;
 
+	@Autowired
+	ReglementRepository reglementRepository;
+
 	@Override
 	public List<Facture> retrieveAllFactures() {
 		List<Facture> factures = factureRepository.findAll();
@@ -84,7 +87,7 @@ public class FactureServiceImpl implements IFactureService {
 	@Override
 	public float pourcentageRecouvrement(Date startDate, Date endDate) {
 		float totalFacturesEntreDeuxDates = factureRepository.getTotalFacturesEntreDeuxDates(startDate,endDate);
-		float totalRecouvrementEntreDeuxDates =reglementService.getChiffreAffaireEntreDeuxDate(startDate,endDate);
+		float totalRecouvrementEntreDeuxDates =reglementRepository.getChiffreAffaireEntreDeuxDate(startDate,endDate);
 		return (totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
 	}
 
