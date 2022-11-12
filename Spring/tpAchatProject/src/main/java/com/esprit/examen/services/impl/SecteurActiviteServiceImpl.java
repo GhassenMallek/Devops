@@ -46,6 +46,7 @@ public class SecteurActiviteServiceImpl implements ISecteurActiviteService {
 
 	@Override
 	public SecteurActivite retrieveSecteurActivite(Long id) {
+
 		return secteurActiviteRepository.findById(id).orElse(null);
 	}
 
