@@ -52,7 +52,9 @@ public class FournisseurServiceImpl implements IFournisseurService {
 	
 	private DetailFournisseur  saveDetailFournisseur(Fournisseur f){
 		DetailFournisseur df = f.getDetailFournisseur();
-		detailFournisseurRepository.save(df);
+		if( df != null ){
+			detailFournisseurRepository.save(df);
+		}
 		return df;
 	}
 
@@ -87,7 +89,9 @@ public class FournisseurServiceImpl implements IFournisseurService {
 		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
 		if( fournisseur != null ){
 			SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite).orElse(null);
-			fournisseur.getSecteurActivites().add(secteurActivite);
+			if(secteurActivite!=null && fournisseur.getSecteurActivites()!=null) {
+				fournisseur.getSecteurActivites().add(secteurActivite);
+			}
 			fournisseurRepository.save(fournisseur);
 		}
 	}

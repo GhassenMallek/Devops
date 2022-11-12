@@ -19,4 +19,5 @@ public class FournisseurDTO  {
     private Set<SecteurActivite> secteurActivites;
     private DetailFournisseur detailFournisseur;
 
+
 }
