@@ -119,6 +119,7 @@ public class ProductServiceImplTest {
 	public void assignProduitToStock() {
 		this.s1 = new Stock();
 		this.s1.setIdStock(5L);
+		this.s1.setLibelleStock("stocktest");
 		
 		this.p2 = new Produit();
 		this.p2.setIdProduit(2L);
@@ -126,7 +127,12 @@ public class ProductServiceImplTest {
 		
 		this.modelMapper = new ModelMapper();
 		
-		produitService.assignProduitToStock(p2.getIdProduit(), s1.getIdStock());
+		when(stockrepository.findById(anyLong())).thenReturn(Optional.of(s1));
+		Stock existingstock = stockServiceImpl.retrieveStock(s1.getIdStock());
+		assertNotNull(existingstock);
+		assertThat(existingstock.getIdStock()).isNotNull();
+		
+		produitService.assignProduitToStock(p2.getIdProduit(), p2.getStock().getIdStock());
 		assertEquals(p2.getStock().getIdStock(),s1.getIdStock());
 	}
 	
