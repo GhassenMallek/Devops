@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class ReglementServiceImplTest {
 		this.r1.setIdReglement(0L);
 		this.r1.setMontantPaye(100);
 		this.r1.setMontantRestant(10);
-		this.r1.setDateReglement(null);
+		this.r1.setDateReglement(new Date(2022, 11, 12));
 		this.r1.setFacture(null);
 		this.r2 = new Reglement();
 		this.r2.setIdReglement(1L);
@@ -111,19 +112,13 @@ public class ReglementServiceImplTest {
 		assertThat(existingProduit.getIdReglement()).isNotNull();
 
 	}
-//	
-//	@Test
-//	public void getChiffreAffaireEntreDeuxDate() {
-//		init();
-//		when(reglementRepository.findById(anyLong())).thenReturn(Optional.of(r1));
-//		
-//		when(produitRepository.save(any(Produit.class))).thenReturn(p1);
-//		p1.setLibelleProduit("Fantacy");
-//		ProduitDTO prm=modelMapper.map(p1, ProduitDTO.class);
-//		Produit exisitingProduit = produitService.updateProduit(prm);
-//		
-//		assertNotNull(exisitingProduit);
-//		assertEquals("Fantacy", exisitingProduit.getLibelleProduit());
-//	}
+	
+	@Test
+	public void getChiffreAffaireEntreDeuxDate() {
+	init();
+	when(reglementServiceImpl.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).thenReturn(r1.getMontantPaye());
+	assertThat(reglementServiceImpl.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).isEqualTo(100f);
+
+}
 
 }
