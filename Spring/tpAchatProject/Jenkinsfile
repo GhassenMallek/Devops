@@ -5,28 +5,28 @@
                 stage('MVN Clean') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn clean install"""
+                            sh """mvn clean install -Drevision=${env.BUILD_NUMBER}"""
                         }
                     }
                 }
                 stage('MVN Compile') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn compile"""
+                            sh """mvn compile -Drevision=${env.BUILD_NUMBER}"""
                         }
                     }
                 }
                 stage('MVN Test') {
                     steps {
                         dir('Spring/tpAchatProject') {
-                            sh """mvn test"""
+                            sh """mvn test -Drevision=${env.BUILD_NUMBER}"""
                         }
                     }
                 }
                 stage('Sonar'){
                     steps{
                         dir('Spring/tpAchatProject') {
-                            sh """mvn sonar:sonar -Dsonar.projectKey=ghassen -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=e4688b6bdba8398b84fa7e94f008b20c340e18d5"""
+                            sh """mvn sonar:sonar -Dsonar.projectKey=ghassen -Drevision=${env.BUILD_NUMBER} -Dsonar.host.url=http://172.10.0.55:9000 -Dsonar.login=e4688b6bdba8398b84fa7e94f008b20c340e18d5"""
                         }
                     }
                 }
