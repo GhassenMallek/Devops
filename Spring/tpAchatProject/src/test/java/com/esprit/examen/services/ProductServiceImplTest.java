@@ -1,9 +1,10 @@
 package com.esprit.examen.services;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -37,6 +38,8 @@ public class ProductServiceImplTest {
 	private ProduitRepository produitRepository;
 	@Mock
 	private StockRepository stockrepository;
+	@Mock
+	private ProduitServiceImpl produitServiceMock;
 
 	@InjectMocks
 	private ProduitServiceImpl produitService;
@@ -46,6 +49,7 @@ public class ProductServiceImplTest {
 
 	private Produit p1;
 	private Produit p2;
+	private Produit p3;
 	private Stock s1;
 	ModelMapper modelMapper;
 
@@ -116,19 +120,19 @@ public class ProductServiceImplTest {
 		assertEquals("Fantacy", exisitingProduit.getLibelleProduit());
 	}
 	@Test
-	public void assignProduitToStock() { 
+	public void assignProduitToStockTruecondion() { 
 		init();
 		
 		when(stockrepository.findById(anyLong())).thenReturn(Optional.of(s1));
 		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
-
-		Optional<Produit> produit = Optional.of(p1);
-		assertTrue(produit.isPresent());
-		assertEquals(p1, produit.get());
-
+		assertNotNull(p1);
 		produitService.assignProduitToStock(p1.getIdProduit(), s1.getIdStock());
 		assertThat(p1.getStock().getIdStock()).isEqualTo(s1.getIdStock());
-
+	}
+	@Test
+	public void assignProduitToStockFalsecondion() { 
+		init();
+		assertThat(p3).isNull();
 		
 	}
 	
