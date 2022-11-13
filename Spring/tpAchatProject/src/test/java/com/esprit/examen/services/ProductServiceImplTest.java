@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -78,7 +77,7 @@ public class ProductServiceImplTest {
 		ProduitDTO prm=modelMapper.map(p1, ProduitDTO.class);
 		Produit pnew=produitService.addProduit(prm);
 		assertNotNull(pnew);
-		assertThat(pnew.getIdProduit()).isEqualTo(0L);
+		assertThat(pnew.getIdProduit()).isZero();
 	}
 
 	
