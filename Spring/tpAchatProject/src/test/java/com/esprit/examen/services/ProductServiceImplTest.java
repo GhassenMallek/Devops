@@ -123,6 +123,7 @@ public class ProductServiceImplTest {
 	public void assignProduitToStockTruecondion() { 
 		init();
 		assertThat(p3).isNull();
+		when(produitRepository.findById(anyLong())).thenReturn(null);
 		when(stockrepository.findById(anyLong())).thenReturn(Optional.of(s1));
 		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
 		assertNotNull(p1);

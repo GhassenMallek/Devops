@@ -83,9 +83,9 @@ public class ProduitServiceImpl implements IProduitService {
 	public void assignProduitToStock(Long idProduit, Long idStock) {
 
 			Optional<Produit>  produit = produitRepository.findById(idProduit);
-			if (produit.isPresent()) {
-				Stock stock = stockRepository.findById(idStock).orElse(null);
-				produit.get().setStock(stock);
+			Optional<Stock> stock = stockRepository.findById(idStock);
+			if (produit.isPresent() && stock.isPresent()) {
+				produit.get().setStock(stock.get( ));
 				produitRepository.save(produit.get());
 			}
 			
