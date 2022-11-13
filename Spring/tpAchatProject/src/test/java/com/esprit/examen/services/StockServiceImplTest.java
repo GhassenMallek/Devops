@@ -16,7 +16,9 @@ import org.modelmapper.ModelMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,16 +34,18 @@ public class StockServiceImplTest {
 	@Mock
 	private StockRepository stockRepository;
 	@InjectMocks
-	private IStockService stockService = new StockServiceImpl();
+	private StockServiceImpl stockService;
 	private Stock s1;
 	private Stock s2;
+
+	private String finalMessage;
 	ModelMapper modelMapper;
 	@BeforeEach
 	public void init() {
 		this.s1 = new Stock();
 		this.s1.setIdStock(0L);
 		this.s1.setLibelleStock("Test 1");
-		this.s1.setQte(11);
+		this.s1.setQte(10);
 		this.s1.setQteMin(11);
 
 		this.s2 = new Stock();
@@ -50,6 +54,7 @@ public class StockServiceImplTest {
 		this.s2.setQte(22);
 		this.s2.setQteMin(22);
 
+		this.finalMessage = "";
 		this.modelMapper = new ModelMapper();
 	}
 	@Test
@@ -110,5 +115,15 @@ public class StockServiceImplTest {
 		assertNotNull(exisitingStock);
 		assertEquals("faza", exisitingStock.getLibelleStock());
 
+	}
+
+	@Test
+	@DisplayName("Test Retrieve Status Stock")
+	public void testRetrieveStatusStock() {
+		init();
+		List<Stock> stocksEnRouge = new ArrayList<>();
+		stocksEnRouge.add(s1);
+		when(stockRepository.retrieveStatusStock()).thenReturn(stocksEnRouge);
+		assertThat(stockService.retrieveStatusStock()).contains("le stock Test 1 a une quantité de 10 inférieur à la quantité minimale a ne pas dépasser de 11");
 	}
 }
