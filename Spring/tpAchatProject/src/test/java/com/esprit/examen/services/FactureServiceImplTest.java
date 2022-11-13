@@ -136,9 +136,9 @@ public class FactureServiceImplTest {
         init();
         Long FactureId = 0L;
         when(factureRepository.findById(FactureId)).thenReturn(Optional.of(f1));
-        assertThat(f1.getArchivee()).isEqualTo(false);
+        assertThat(f1.getArchivee()).isFalse();
         factureService.cancelFacture(FactureId);
-        assertThat(f1.getArchivee()).isEqualTo(true);
+        assertThat(f1.getArchivee()).isTrue();
     }
 
     @Test
@@ -150,19 +150,19 @@ public class FactureServiceImplTest {
         list.add(f2);
         fournisseur.setFactures(list);
         factureService.getFacturesByFournisseur(fournisseur.getIdFournisseur());
-        assertThat(fournisseur.getFactures().size()).isEqualTo(2);
+        assertThat(fournisseur.getFactures()).hasSize(2);
     }
     @Test
     @DisplayName("Test Assign Operateur To Facture")
     public void testAssignOperateurToFacture() {
         init();
         when(factureRepository.findById(anyLong())).thenReturn(Optional.of(f1));
-        assertThat(f1.getIdFacture()).isEqualTo(0L);
+        assertThat(f1.getIdFacture()).isZero();
         when(operateurRepository.findById(anyLong())).thenReturn(Optional.of(o1));
         Set<Facture> list = new HashSet<>();
         o1.setFactures(list);
         factureService.assignOperateurToFacture(o1.getIdOperateur(), f1.getIdFacture());
-        assertThat(o1.getFactures().size()).isEqualTo(1);
+        assertThat(o1.getFactures()).hasSize(1);
     }
 
     @Test
