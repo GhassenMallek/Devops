@@ -121,7 +121,10 @@ public class ProductServiceImplTest {
 		
 		when(stockrepository.findById(anyLong())).thenReturn(Optional.of(s1));
 		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
-		assertNotNull(p1);
+
+		Optional<Produit> expected = Optional.of(p1);
+		assertThat(expected).isNotEmpty();
+
 		produitService.assignProduitToStock(p1.getIdProduit(), s1.getIdStock());
 		assertThat(p1.getStock().getIdStock()).isEqualTo(s1.getIdStock());
 
