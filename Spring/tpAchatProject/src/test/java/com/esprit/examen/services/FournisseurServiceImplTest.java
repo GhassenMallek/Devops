@@ -15,6 +15,8 @@ import static org.mockito.Mockito.verify;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.*;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @Slf4j
