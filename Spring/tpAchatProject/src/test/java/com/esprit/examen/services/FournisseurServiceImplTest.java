@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.*;
 
-
+@RunWith(SpringRunner.class)
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 public class FournisseurServiceImplTest {
