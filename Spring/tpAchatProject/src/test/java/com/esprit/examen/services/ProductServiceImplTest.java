@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.esprit.examen.services.impl.ProduitServiceImpl;
+import com.esprit.examen.services.impl.StockServiceImpl;
+
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,8 +27,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.esprit.examen.entities.Produit;
+import com.esprit.examen.entities.Stock;
 import com.esprit.examen.entities.dto.ProduitDTO;
 import com.esprit.examen.repositories.ProduitRepository;
+import com.esprit.examen.repositories.StockRepository;
 
 
 @RunWith(SpringRunner.class)
@@ -34,24 +38,35 @@ import com.esprit.examen.repositories.ProduitRepository;
 public class ProductServiceImplTest {
 	@Mock
 	private ProduitRepository produitRepository;
+	@Mock
+	private StockRepository stockrepository;
 
 	@InjectMocks
 	private ProduitServiceImpl produitService;
+	@InjectMocks
+	private StockServiceImpl stockServiceImpl;
+
 
 	private Produit p1;
 	private Produit p2;
+	private Stock s1;
 	ModelMapper modelMapper;
 
 	@BeforeEach
 	public void init() {
 		this.p1 = new Produit();
-		this.p1.setIdProduit(0L);
+		this.p1.setIdProduit(1L);
 		this.p1.setPrix(100);
-		this.p1.setLibelleProduit("Avatar");
+		this.p1.setLibelleProduit("test");
 		this.p2 = new Produit();
-		this.p2.setIdProduit(1L);
+		this.p2.setIdProduit(2L);
 		this.p2.setPrix(100);
-		this.p2.setLibelleProduit("Avatar");
+		this.p2.setStock(s1);
+		this.p2.setLibelleProduit("test2");
+		this.s1 = new Stock();
+		this.s1.setIdStock(1L);
+		this.s1.setQte(100);
+		this.s1.setLibelleStock("Stock 1");
 		this.modelMapper = new ModelMapper();
 	}
 
@@ -62,17 +77,9 @@ public class ProductServiceImplTest {
 		ProduitDTO prm=modelMapper.map(p1, ProduitDTO.class);
 		Produit pnew=produitService.addProduit(prm);
 		assertNotNull(pnew);
-		assertThat(pnew.getPrix()).isEqualTo(100);
+		assertThat(pnew.getIdProduit()).isEqualTo(1L);
 	}
-	@Test
-	public void save() {
-		init();
-		when(produitRepository.save(any(Produit.class))).thenReturn(p1);
-		ProduitDTO prm=modelMapper.map(p1, ProduitDTO.class);
-		Produit newProduit = produitService.addProduit(prm);
-		assertNotNull(newProduit);
-		assertThat(newProduit.getPrix()).isEqualTo(100);
-	}
+
 	
 	@Test
 	public void getProduits() {
@@ -111,6 +118,26 @@ public class ProductServiceImplTest {
 		assertNotNull(exisitingProduit);
 		assertEquals("Fantacy", exisitingProduit.getLibelleProduit());
 	}
+	@Test
+	public void assignProduitToStock() {
+		this.s1 = new Stock();
+		this.s1.setIdStock(5L);
+		this.s1.setLibelleStock("stocktest");
+		
+		this.p2 = new Produit();
+		this.p2.setIdProduit(2L);
+		this.p2.setStock(s1);
+		
+		this.modelMapper = new ModelMapper();
+		
+		when(stockrepository.findById(anyLong())).thenReturn(Optional.of(s1));
+		Stock existingstock = stockServiceImpl.retrieveStock(s1.getIdStock());
+		assertNotNull(existingstock);
+		assertThat(existingstock.getIdStock()).isNotNull();
+		
+		produitService.assignProduitToStock(p2.getIdProduit(), p2.getStock().getIdStock());
+		assertEquals(p2.getStock().getIdStock(),s1.getIdStock());
+	}
 	
 	@Test
 	public void deleteProduit() {
@@ -122,4 +149,5 @@ public class ProductServiceImplTest {
 		verify(produitRepository, times(1)).deleteById(anyLong());
 		
 	}
+	
 }
