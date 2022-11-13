@@ -23,6 +23,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 
+@RunWith(SpringRunner.class)
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 public class SecteurActiviteServiceImplTest {
