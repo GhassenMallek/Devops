@@ -1,6 +1,6 @@
 package com.esprit.examen.services;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -122,8 +122,9 @@ public class ProductServiceImplTest {
 		when(stockrepository.findById(anyLong())).thenReturn(Optional.of(s1));
 		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
 
-		Optional<Produit> expected = Optional.of(p1);
-		assertThat(expected).isNotEmpty();
+		Optional<Produit> produit = Optional.of(p1);
+		assertTrue(produit.isPresent());
+		assertEquals(p1, produit.get());
 
 		produitService.assignProduitToStock(p1.getIdProduit(), s1.getIdStock());
 		assertThat(p1.getStock().getIdStock()).isEqualTo(s1.getIdStock());
