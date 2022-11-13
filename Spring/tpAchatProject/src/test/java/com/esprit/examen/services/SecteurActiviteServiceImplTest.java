@@ -22,6 +22,8 @@ import java.util.Optional;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @Slf4j
