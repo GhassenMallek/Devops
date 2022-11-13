@@ -22,7 +22,6 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class OperateurServiceImplTest {
     @Mock
