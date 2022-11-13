@@ -34,7 +34,7 @@ services:
       - .m2:/home/.m2
     stdin_open: true
     tty: true
-front:
+  front:
     depends_on:
       - app
     build: 
