@@ -3,7 +3,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.verify;
+
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -20,6 +22,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
+import com.esprit.examen.entities.Facture;
+
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.entities.dto.ReglementDTO;
 import com.esprit.examen.repositories.ReglementRepository;
@@ -35,6 +40,8 @@ public class ReglementServiceImplTest {
 
 	private Reglement r1;
 	private Reglement r2;
+	private Reglement r3;
+	private Facture f1;
 	ModelMapper modelMapper;
 
 	@BeforeEach
@@ -54,17 +61,9 @@ public class ReglementServiceImplTest {
 		this.modelMapper = new ModelMapper();
 	}
 	
+
 	@Test
-	public void testAddReglement() {
-		init();
-		when(reglementRepository.save(any(Reglement.class))).thenReturn(r1);
-		ReglementDTO prm=modelMapper.map(r1, ReglementDTO.class);
-		Reglement pnew=reglementServiceImpl.addReglement(prm);
-		assertNotNull(pnew);
-		assertThat(pnew.getMontantRestant()).isEqualTo(10);
-	}
-	@Test
-	public void save() {
+	public void addReglementTest() {
 		init();
 		when(reglementRepository.save(any(Reglement.class))).thenReturn(r1);
 		ReglementDTO prm=modelMapper.map(r1, ReglementDTO.class);
@@ -85,17 +84,24 @@ public class ReglementServiceImplTest {
 		assertNotNull(Reglements);
 	}
 	
-//	@Test
-//	public void retrieveReglementByFacture() {
-//		init();
-//		when(reglementRepository.save(any(Reglement.class))).thenReturn(r1);
-//		ReglementDTO prm=modelMapper.map(r1, ReglementDTO.class);
-//		Reglement pnew=reglementServiceImpl.addReglement(prm);
-//		when(reglementRepository.findById(anyLong())).thenReturn(Optional.of(r1));
-//		Produit existingReglement = reglementServiceImpl.retrieveReglementByFacture(pnew.getFacture());
-//		assertNotNull(existingReglement);
-//		assertThat(existingReglement.getIdProduit()).isNotNull();
-//	}
+	@Test
+	public void retrieveReglementByFacture() {
+		this.f1 = new Facture();
+		this.f1.setIdFacture(1L);
+		
+		this.r2 = new Reglement();
+		this.r2.setIdReglement(2L);
+		this.r2.setFacture(f1);
+		this.r3 = new Reglement();
+		this.r3.setIdReglement(3L);
+		this.r3.setFacture(f1);
+		this.modelMapper = new ModelMapper();
+		
+		System.out.println("hello ghassef " + r2.getFacture().toString()+ " " + r3.getFacture().toString());
+		List<Reglement> Reglements = reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture());
+		System.out.println(reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture()));
+		assertEquals(0,Reglements.size());
+	}
 //	
 //	@Test
 //	public void getChiffreAffaireEntreDeuxDate() {

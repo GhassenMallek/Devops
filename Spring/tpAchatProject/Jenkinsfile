@@ -1,13 +1,6 @@
-        pipeline {
+pipeline {
             agent any
             stages {
-                stage('Checkout GIT') {
-                    steps {
-                        echo 'Pulling..'
-                        git branch: 'Rami',
-                        url : 'https://github.com/MGhassen30798/Devops'
-                    }
-                }
                 stage('MVN Clean') {
                     steps {
                         dir('Spring/tpAchatProject') {
@@ -43,24 +36,25 @@
                                 }
                             }
                         }
-                stage('Building Docker Image') {
+                        stage('Building Docker Image') {
                     steps {
                         dir('Spring/tpAchatProject'){
-                            sh 'docker build -t ramihb/tpachat .'
-                                }
+                        sh 'docker build -t ramihb/tpachat .'
+             }
                             }
                         }
                 stage('Login to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker login -u ramihb -p Haboub98.'
+                            sh 'docker login -u mghassen1998 -p Ghassen1998'
                             }
                         }
                     }
                 stage('Push to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker push ramihb/tpachat'
+
+                            sh 'docker push mghassen1998/tpachat'
                              }
                         }
                     }
@@ -72,4 +66,6 @@
                        }
                     }
                 }
+
             }
+

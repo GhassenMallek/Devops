@@ -1,6 +1,8 @@
 package com.esprit.examen.controllers;
 
 import java.util.List;
+
+import com.esprit.examen.entities.dto.SecteurActiviteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.examen.entities.SecteurActivite;
@@ -29,7 +31,7 @@ public class SecteurActiviteController {
 
 	@PostMapping("/add-secteurActivite")
 	@ResponseBody
-	public SecteurActivite addSecteurActivite(@RequestBody SecteurActivite sa) {
+	public SecteurActivite addSecteurActivite(@RequestBody SecteurActiviteDTO sa) {
 		return  secteurActiviteService.addSecteurActivite(sa);
 	}
 
@@ -41,7 +43,7 @@ public class SecteurActiviteController {
 
 	@PutMapping("/modify-secteurActivite")
 	@ResponseBody
-	public SecteurActivite modifySecteurActivite(@RequestBody SecteurActivite secteurActivite) {
+	public SecteurActivite modifySecteurActivite(@RequestBody SecteurActiviteDTO secteurActivite) {
 		return secteurActiviteService.updateSecteurActivite(secteurActivite);
 	}
 
