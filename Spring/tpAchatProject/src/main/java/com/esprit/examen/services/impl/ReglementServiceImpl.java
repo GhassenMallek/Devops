@@ -16,8 +16,6 @@ import com.esprit.examen.repositories.ReglementRepository;
 public class ReglementServiceImpl implements IReglementService {
 
 	@Autowired
-	FactureRepository factureRepository;
-	@Autowired
 	ReglementRepository reglementRepository;
 
 	@Override

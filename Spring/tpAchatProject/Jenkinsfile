@@ -50,6 +50,7 @@
                                 }
                             }
                         }
+
                 stage('Login to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
