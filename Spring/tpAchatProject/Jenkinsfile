@@ -57,7 +57,7 @@
         steps {
           dir('Spring/tpAchatProject') {
             withCredentials([usernameColonPassword(credentialsId: 'Nexus-Creds', variable: 'NEXUS_CREDENTIALS')]) {
-              sh script: 'curl -u ${NEXUS_CREDENTIALS} -o /var/lib/jenkins/workspace/Devops/Spring/tpAchatProject/target/tpachat.jar "$NEXUS_URL/repository/$NEXUS_REPOSITORY/com/esprit/examen/tpAchatProject/$VERSION/tpAchatProject-$VERSION.jar"'
+              sh script: 'curl -u ${NEXUS_CREDENTIALS} -o /var/lib/jenkins/workspace/Devops/Spring/tpAchatProject/target/tpachat.jar "http://172.10.0.55:8081/repository/maven-releases/com/esprit/examen/tpAchatProject/$VERSION/tpAchatProject-$VERSION.jar"'
             }
           }
         }
