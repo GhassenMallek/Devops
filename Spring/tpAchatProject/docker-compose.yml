@@ -33,5 +33,10 @@ services:
     stdin_open: true
     tty: true
 
-volumes:
-  db:
+  front:
+    depends_on:
+      - app
+    build:
+      context: ../../Angular/crud-tuto-front/
+    ports:
+      - "4201:4201"
