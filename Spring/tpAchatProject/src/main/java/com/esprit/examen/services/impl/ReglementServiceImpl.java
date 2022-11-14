@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.entities.dto.ReglementDTO;
-import com.esprit.examen.repositories.FactureRepository;
 import com.esprit.examen.repositories.ReglementRepository;
 
 @Service
