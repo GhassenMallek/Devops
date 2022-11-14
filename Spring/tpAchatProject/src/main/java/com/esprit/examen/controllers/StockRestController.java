@@ -15,6 +15,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @Api(tags = "Gestion des stocks")
+@CrossOrigin("*")
 @RequestMapping("/stock")
 public class StockRestController {
 
