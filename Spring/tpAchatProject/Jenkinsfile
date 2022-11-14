@@ -78,6 +78,7 @@
                     steps{
                         dir('Spring/tpAchatProject'){
                             sh 'docker push mohamedmmc/tpachat'
+                            sh 'docker push mohamedmmc/tpachatfront'
                              }
                         }
                     }
