@@ -16,9 +16,7 @@ import org.modelmapper.ModelMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

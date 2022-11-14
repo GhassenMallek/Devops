@@ -15,9 +15,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class ProduitDTO {
 	private Long idProduit;
 	private String codeProduit;
