@@ -43,6 +43,13 @@
                                 }
                             }
                         }
+                    stage('Building Docker Image Angular') {
+                           steps {
+                               dir('Angular/crud-tuto-front') {
+                            sh 'docker build -t $DOCKER_CREDS_USR/tpachatfront .'
+                       }
+                   }
+                }
                 stage('Building Docker Image') {
                     steps {
                         dir('Spring/tpAchatProject'){
