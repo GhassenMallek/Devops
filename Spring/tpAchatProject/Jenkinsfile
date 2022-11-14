@@ -4,7 +4,7 @@
                 stage('Checkout GIT') {
                     steps {
                         echo 'Pulling..'
-                        git branch: 'main',
+                        git branch: 'Rami',
                         url : 'https://github.com/MGhassen30798/Devops'
                     }
                 }
