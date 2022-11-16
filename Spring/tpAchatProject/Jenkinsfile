@@ -126,7 +126,9 @@ pipeline {
     }
     stage('Docker Compose') {
       steps {
+        dir('Spring/tpAchatProject'){
         sh 'docker-compose up -d'
+        }
       }
     }
   }
