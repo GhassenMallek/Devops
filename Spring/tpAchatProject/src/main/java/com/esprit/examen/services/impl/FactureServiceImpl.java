@@ -4,7 +4,10 @@ import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.entities.dto.FactureDTO;
-import com.esprit.examen.repositories.*;
+import com.esprit.examen.repositories.FactureRepository;
+import com.esprit.examen.repositories.FournisseurRepository;
+import com.esprit.examen.repositories.OperateurRepository;
+import com.esprit.examen.repositories.ReglementRepository;
 import com.esprit.examen.services.IFactureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class FactureServiceImpl implements IFactureService {
     @Autowired
     ReglementServiceImpl reglementService;
 	
+
+	@Autowired
+	ReglementRepository reglementRepository;
 
 	@Override
 	public List<Facture> retrieveAllFactures() {
@@ -88,7 +94,7 @@ public class FactureServiceImpl implements IFactureService {
 	@Override
 	public float pourcentageRecouvrement(Date startDate, Date endDate) {
 		float totalFacturesEntreDeuxDates = factureRepository.getTotalFacturesEntreDeuxDates(startDate,endDate);
-		float totalRecouvrementEntreDeuxDates =reglementService.getChiffreAffaireEntreDeuxDate(startDate,endDate);
+		float totalRecouvrementEntreDeuxDates =reglementRepository.getChiffreAffaireEntreDeuxDate(startDate,endDate);
 		return (totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
 	}
 

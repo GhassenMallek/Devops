@@ -17,6 +17,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @Api(tags = "Gestion des factures")
+@CrossOrigin("*")
 @RequestMapping("/facture")
 public class FactureRestController {
     @Autowired

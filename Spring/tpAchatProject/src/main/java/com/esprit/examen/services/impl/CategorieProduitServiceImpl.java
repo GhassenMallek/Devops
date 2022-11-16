@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.CategorieProduit;
 import com.esprit.examen.entities.dto.CategorieProduitDTO;
 import com.esprit.examen.repositories.CategorieProduitRepository;
+import com.esprit.examen.services.ICategorieProduitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategorieProduitServiceImpl implements ICategorieProduitService {

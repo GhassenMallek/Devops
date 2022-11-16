@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.esprit.examen.services.impl.ProduitServiceImpl;
+import com.esprit.examen.services.impl.StockServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,8 +30,7 @@ import com.esprit.examen.entities.Stock;
 import com.esprit.examen.entities.dto.ProduitDTO;
 import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.StockRepository;
-import com.esprit.examen.services.impl.ProduitServiceImpl;
-import com.esprit.examen.services.impl.StockServiceImpl;
+
 
 
 @RunWith(SpringRunner.class)
@@ -83,7 +83,6 @@ public class ProductServiceImplTest {
 		assertThat(pnew.getIdProduit()).isZero();
 	}
 
-	
 	@Test
 	public void getProduits() {
 		init();
@@ -95,7 +94,7 @@ public class ProductServiceImplTest {
 		assertEquals(2, Produits.size());
 		assertNotNull(Produits);
 	}
-	
+
 	@Test
 	public void getProduitById() {
 		init();
@@ -107,21 +106,22 @@ public class ProductServiceImplTest {
 		assertNotNull(existingProduit);
 		assertThat(existingProduit.getIdProduit()).isNotNull();
 	}
-	
+
 	@Test
 	public void updateProduit() {
 		init();
 		when(produitRepository.findById(anyLong())).thenReturn(Optional.of(p1));
-		
+
 		when(produitRepository.save(any(Produit.class))).thenReturn(p1);
 		p1.setLibelleProduit("Fantacy");
 		ProduitDTO prm=modelMapper.map(p1, ProduitDTO.class);
 		Produit exisitingProduit = produitService.updateProduit(prm);
-		
+
 		assertNotNull(exisitingProduit);
 		assertEquals("Fantacy", exisitingProduit.getLibelleProduit());
 	}
 	@Test
+
 	public void assignProduitToStockTruecondion() { 
 		init();
 		assertThat(p3).isNull();
@@ -138,7 +138,7 @@ public class ProductServiceImplTest {
 		assertThat(p3).isNull();
 		
 	}
-	
+
 	@Test
 	public void deleteProduit() {
 		init();
@@ -147,7 +147,8 @@ public class ProductServiceImplTest {
 		doNothing().when(produitRepository).deleteById(anyLong());
 		produitService.deleteProduit(ProduitId);
 		verify(produitRepository, times(1)).deleteById(anyLong());
-		
+
 	}
+
 	
 }

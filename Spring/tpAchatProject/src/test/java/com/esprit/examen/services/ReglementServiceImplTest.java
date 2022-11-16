@@ -61,7 +61,6 @@ public class ReglementServiceImplTest {
 		this.r2.setFacture(null);
 		this.modelMapper = new ModelMapper();
 	}
-	
 
 	@Test
 	public void addReglementTest() {
@@ -72,7 +71,7 @@ public class ReglementServiceImplTest {
 		assertNotNull(newReglement);
 		assertThat(newReglement.getMontantRestant()).isEqualTo(10);
 	}
-	
+
 	@Test
 	public void getReglement() {
 		init();
@@ -84,12 +83,11 @@ public class ReglementServiceImplTest {
 		assertEquals(2, Reglements.size());
 		assertNotNull(Reglements);
 	}
-	
+
 	@Test
 	public void retrieveReglementByFacture() {
 		this.f1 = new Facture();
 		this.f1.setIdFacture(1L);
-		
 		this.r2 = new Reglement();
 		this.r2.setIdReglement(2L);
 		this.r2.setFacture(f1);
@@ -97,7 +95,6 @@ public class ReglementServiceImplTest {
 		this.r3.setIdReglement(3L);
 		this.r3.setFacture(f1);
 		this.modelMapper = new ModelMapper();
-		
 		System.out.println("hello ghassef " + r2.getFacture().toString()+ " " + r3.getFacture().toString());
 		List<Reglement> Reglements = reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture());
 		System.out.println(reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture()));
