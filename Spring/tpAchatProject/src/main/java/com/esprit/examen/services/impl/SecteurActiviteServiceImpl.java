@@ -2,14 +2,16 @@ package com.esprit.examen.services.impl;
 
 import java.util.List;
 
+import com.esprit.examen.entities.dto.SecteurActiviteDTO;
+import com.esprit.examen.services.ISecteurActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.SecteurActivite;
 import com.esprit.examen.repositories.SecteurActiviteRepository;
-import com.esprit.examen.services.ISecteurActiviteService;
+
 
 @Service
-public class SecteurActiviteServiceImpl implements ISecteurActiviteService{
+public class SecteurActiviteServiceImpl implements ISecteurActiviteService {
 
 	@Autowired
 	SecteurActiviteRepository secteurActiviteRepository;
@@ -19,9 +21,14 @@ public class SecteurActiviteServiceImpl implements ISecteurActiviteService{
 	}
 
 	@Override
-	public SecteurActivite addSecteurActivite(SecteurActivite sa) {
-		secteurActiviteRepository.save(sa);
-		return sa;
+
+	public SecteurActivite addSecteurActivite(SecteurActiviteDTO sa) {
+		return secteurActiviteRepository.save(SecteurActivite.builder()
+				.idSecteurActivite(sa.getIdSecteurActivite())
+				.codeSecteurActivite(sa.getCodeSecteurActivite())
+				.libelleSecteurActivite(sa.getLibelleSecteurActivite())
+				.fournisseurs(sa.getFournisseurs())
+		.build());
 	}
 
 	@Override
@@ -31,12 +38,17 @@ public class SecteurActiviteServiceImpl implements ISecteurActiviteService{
 	}
 
 	@Override
-	public SecteurActivite updateSecteurActivite(SecteurActivite sa) {
-		return secteurActiviteRepository.save(sa);
-	}
+	public SecteurActivite updateSecteurActivite(SecteurActiviteDTO sa) {
+		return secteurActiviteRepository.save(SecteurActivite.builder()
+				.idSecteurActivite(sa.getIdSecteurActivite())
+				.codeSecteurActivite(sa.getCodeSecteurActivite())
+				.libelleSecteurActivite(sa.getLibelleSecteurActivite())
+				.fournisseurs(sa.getFournisseurs())
+				.build());	}
 
 	@Override
 	public SecteurActivite retrieveSecteurActivite(Long id) {
+
 		return secteurActiviteRepository.findById(id).orElse(null);
 	}
 

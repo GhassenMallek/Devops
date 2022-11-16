@@ -13,17 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.esprit.examen.entities.dto.FournisseurDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Fournisseur implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +43,18 @@ public class Fournisseur implements Serializable {
     private Set<SecteurActivite> secteurActivites;
     @OneToOne(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     private DetailFournisseur detailFournisseur;
-    
+
+	public FournisseurDTO toFournisseurDTO(){
+		return FournisseurDTO.builder()
+				.idFournisseur(this.idFournisseur)
+				.code(this.code)
+            	.libelle(this.libelle)
+				.categorieFournisseur(this.categorieFournisseur)
+				.factures(this.factures)
+				.secteurActivites(this.secteurActivites)
+				.detailFournisseur(this.detailFournisseur)
+				.build();
+	}
 
 	
 }

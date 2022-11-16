@@ -2,11 +2,14 @@ package com.esprit.examen.services.impl;
 
 import java.util.List;
 
+import com.esprit.examen.entities.dto.OperateurDTO;
+import com.esprit.examen.services.IOperateurService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.repositories.OperateurRepository;
-import com.esprit.examen.services.IOperateurService;
+
 
 @Service
 public class OperateurServiceImpl implements IOperateurService {
@@ -19,27 +22,35 @@ public class OperateurServiceImpl implements IOperateurService {
 	}
 
 	@Override
-	public Operateur addOperateur(Operateur o) {
-		operateurRepository.save(o);
-		return o;
+
+	public Operateur addOperateur(OperateurDTO o) {
+		return operateurRepository.save(Operateur.builder()
+				.factures(o.getFactures())
+				.nom(o.getNom())
+				.password(o.getPassword())
+				.prenom(o.getPrenom())
+				.build());
 	}
 
 	@Override
 	public void deleteOperateur(Long id) {
 		operateurRepository.deleteById(id);
-		
+
 	}
 
 	@Override
-	public Operateur updateOperateur(Operateur o) {
-		operateurRepository.save(o);
-		return o;
+	public Operateur updateOperateur(OperateurDTO o) {
+		return operateurRepository.save(Operateur.builder()
+				.factures(o.getFactures())
+				.nom(o.getNom())
+				.password(o.getPassword())
+				.prenom(o.getPrenom())
+				.build());
 	}
 
 	@Override
 	public Operateur retrieveOperateur(Long id) {
-		Operateur operateur = operateurRepository.findById(id).orElse(null);
-		return operateur;
+		return  operateurRepository.findById(id).orElse(null);
 	}
 
 }

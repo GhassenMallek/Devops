@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,7 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Transactional
 	public Produit addProduit(ProduitDTO p) {
+
 	return	produitRepository.save(Produit.builder()
 				.codeProduit(p.getCodeProduit())
 				.libelleProduit(p.getCodeProduit())
@@ -82,7 +84,6 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public void assignProduitToStock(Long idProduit, Long idStock) {
-
 			Optional<Produit>  produit = produitRepository.findById(idProduit);
 			Optional<Stock> stock = stockRepository.findById(idStock);
 			if (produit.isPresent() && stock.isPresent()) {

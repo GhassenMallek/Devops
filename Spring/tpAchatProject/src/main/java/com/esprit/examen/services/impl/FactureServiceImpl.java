@@ -6,7 +6,6 @@ import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.entities.dto.FactureDTO;
 import com.esprit.examen.repositories.*;
 import com.esprit.examen.services.IFactureService;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +32,7 @@ public class FactureServiceImpl implements IFactureService {
     @Autowired
     ReglementServiceImpl reglementService;
 	
+
 	@Override
 	public List<Facture> retrieveAllFactures() {
 		List<Facture> factures = factureRepository.findAll();
@@ -42,7 +42,6 @@ public class FactureServiceImpl implements IFactureService {
 		return factures;
 	}
 
-	
 	public Facture addFacture(FactureDTO f) {
 
 		return factureRepository.save(Facture.builder()
@@ -92,6 +91,5 @@ public class FactureServiceImpl implements IFactureService {
 		float totalRecouvrementEntreDeuxDates =reglementService.getChiffreAffaireEntreDeuxDate(startDate,endDate);
 		return (totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
 	}
-	
 
 }
