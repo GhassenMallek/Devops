@@ -28,6 +28,8 @@ import com.esprit.examen.entities.Stock;
 import com.esprit.examen.entities.dto.ProduitDTO;
 import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.StockRepository;
+import com.esprit.examen.services.impl.ProduitServiceImpl;
+import com.esprit.examen.services.impl.StockServiceImpl;
 
 
 @RunWith(SpringRunner.class)

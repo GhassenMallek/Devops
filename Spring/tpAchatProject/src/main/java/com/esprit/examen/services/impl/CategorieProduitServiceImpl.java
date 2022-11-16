@@ -1,4 +1,4 @@
-package com.esprit.examen.services;
+package com.esprit.examen.services.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.CategorieProduit;
 import com.esprit.examen.entities.dto.CategorieProduitDTO;
 import com.esprit.examen.repositories.CategorieProduitRepository;
+import com.esprit.examen.services.ICategorieProduitService;
 
 @Service
 public class CategorieProduitServiceImpl implements ICategorieProduitService {

@@ -1,4 +1,4 @@
-package com.esprit.examen.services;
+package com.esprit.examen.services.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +14,8 @@ import com.esprit.examen.repositories.DetailFournisseurRepository;
 import com.esprit.examen.repositories.FournisseurRepository;
 import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.SecteurActiviteRepository;
+import com.esprit.examen.services.IFournisseurService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service

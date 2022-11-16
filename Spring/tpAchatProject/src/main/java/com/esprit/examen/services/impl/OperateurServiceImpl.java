@@ -1,4 +1,4 @@
-package com.esprit.examen.services;
+package com.esprit.examen.services.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.repositories.OperateurRepository;
+import com.esprit.examen.services.IOperateurService;
 
 @Service
 public class OperateurServiceImpl implements IOperateurService {

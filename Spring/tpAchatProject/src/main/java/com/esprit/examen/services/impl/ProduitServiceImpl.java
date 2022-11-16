@@ -1,4 +1,4 @@
-package com.esprit.examen.services;
+package com.esprit.examen.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +14,7 @@ import com.esprit.examen.entities.dto.ProduitDTO;
 import com.esprit.examen.repositories.CategorieProduitRepository;
 import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.StockRepository;
+import com.esprit.examen.services.IProduitService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -85,8 +86,9 @@ public class ProduitServiceImpl implements IProduitService {
 			Optional<Produit>  produit = produitRepository.findById(idProduit);
 			Optional<Stock> stock = stockRepository.findById(idStock);
 			if (produit.isPresent() && stock.isPresent()) {
-				produit.get().setStock(stock.get( ));
+				produit.get().setStock(stock.get());
 				produitRepository.save(produit.get());
+				
 			}
 			
 

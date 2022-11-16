@@ -1,10 +1,12 @@
-package com.esprit.examen.services;
+package com.esprit.examen.services.impl;
 
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.entities.dto.FactureDTO;
 import com.esprit.examen.repositories.*;
+import com.esprit.examen.services.IFactureService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

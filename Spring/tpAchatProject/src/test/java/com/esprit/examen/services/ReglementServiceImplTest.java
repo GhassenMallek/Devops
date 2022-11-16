@@ -25,6 +25,7 @@ import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.entities.dto.ReglementDTO;
 import com.esprit.examen.repositories.ReglementRepository;
+import com.esprit.examen.services.impl.ReglementServiceImpl;
 
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)

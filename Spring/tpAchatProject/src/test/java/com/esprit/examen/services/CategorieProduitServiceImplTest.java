@@ -26,6 +26,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.esprit.examen.entities.CategorieProduit;
 import com.esprit.examen.entities.dto.CategorieProduitDTO;
 import com.esprit.examen.repositories.CategorieProduitRepository;
+import com.esprit.examen.services.impl.CategorieProduitServiceImpl;
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)
 public class CategorieProduitServiceImplTest {
