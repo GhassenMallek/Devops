@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+
 @ExtendWith(MockitoExtension.class)
 public class StockServiceImplTest {
 	@Mock

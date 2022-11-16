@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.esprit.examen.entities.dto.OperateurDTO;
 import com.esprit.examen.services.IOperateurService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.repositories.OperateurRepository;
+
 
 @Service
 public class OperateurServiceImpl implements IOperateurService {
@@ -20,6 +22,7 @@ public class OperateurServiceImpl implements IOperateurService {
 	}
 
 	@Override
+
 	public Operateur addOperateur(OperateurDTO o) {
 		return operateurRepository.save(Operateur.builder()
 				.factures(o.getFactures())
@@ -32,6 +35,7 @@ public class OperateurServiceImpl implements IOperateurService {
 	@Override
 	public void deleteOperateur(Long id) {
 		operateurRepository.deleteById(id);
+
 	}
 
 	@Override

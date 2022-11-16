@@ -24,9 +24,14 @@ public class FactureServiceImpl implements IFactureService {
 	@Autowired
 	OperateurRepository operateurRepository;
 	@Autowired
+	DetailFactureRepository detailFactureRepository;
+	@Autowired
 	FournisseurRepository fournisseurRepository;
 	@Autowired
-	ReglementServiceImpl reglementService;
+	ProduitRepository produitRepository;
+    @Autowired
+    ReglementServiceImpl reglementService;
+	
 
 	@Override
 	public List<Facture> retrieveAllFactures() {
@@ -36,7 +41,6 @@ public class FactureServiceImpl implements IFactureService {
 		}
 		return factures;
 	}
-
 
 	public Facture addFacture(FactureDTO f) {
 
@@ -87,6 +91,5 @@ public class FactureServiceImpl implements IFactureService {
 		float totalRecouvrementEntreDeuxDates =reglementService.getChiffreAffaireEntreDeuxDate(startDate,endDate);
 		return (totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
 	}
-
 
 }

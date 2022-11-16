@@ -1,4 +1,5 @@
 package com.esprit.examen.services.impl;
+
 import java.util.Date;
 import java.util.List;
 import com.esprit.examen.entities.dto.FournisseurDTO;
@@ -10,11 +11,13 @@ import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.SecteurActivite;
 import com.esprit.examen.repositories.DetailFournisseurRepository;
 import com.esprit.examen.repositories.FournisseurRepository;
+
 import com.esprit.examen.repositories.SecteurActiviteRepository;
 import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class FournisseurServiceImpl implements IFournisseurService {
+
 	@Autowired
 	FournisseurRepository fournisseurRepository;
 	@Autowired
@@ -29,6 +32,7 @@ public class FournisseurServiceImpl implements IFournisseurService {
 		}
 		return fournisseurs;
 	}
+
 	public Fournisseur addFournisseur(FournisseurDTO f) {
 		DetailFournisseur df= new DetailFournisseur();//Slave
 		df.setDateDebutCollaboration(new Date()); //util
@@ -83,4 +87,5 @@ public class FournisseurServiceImpl implements IFournisseurService {
 			fournisseurRepository.save(fournisseur);
 		}
 	}
+
 }
