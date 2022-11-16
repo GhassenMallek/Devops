@@ -4,6 +4,13 @@
                             VERSION = "1.${env.BUILD_NUMBER}"
                           }
             stages {
+                stage('Checkout GIT') {
+                    steps {
+                        echo 'Pulling..'
+                        git branch: 'mouna',
+                        url : 'https://github.com/MGhassen30798/Devops'
+                    }
+                }
               stage('MVN Clean') {
                     steps {
                         dir('Spring/tpAchatProject') {
@@ -68,7 +75,14 @@
                             }
                         }
                     }
-               
+                stage('Push to DockerHub') {
+                    steps{
+                        dir('Spring/tpAchatProject'){
+                            sh 'docker push mounah/tpachat'
+                                sh 'docker push mounah/tpachatfront'
+                             }
+                        }
+                    }
                 stage('Docker Compose'){
                     steps{
                        dir('Spring/tpAchatProject'){
