@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.SecteurActivite;
 import com.esprit.examen.repositories.SecteurActiviteRepository;
 
+
 @Service
 public class SecteurActiviteServiceImpl implements ISecteurActiviteService {
 
@@ -20,6 +21,7 @@ public class SecteurActiviteServiceImpl implements ISecteurActiviteService {
 	}
 
 	@Override
+
 	public SecteurActivite addSecteurActivite(SecteurActiviteDTO sa) {
 		return secteurActiviteRepository.save(SecteurActivite.builder()
 				.idSecteurActivite(sa.getIdSecteurActivite())

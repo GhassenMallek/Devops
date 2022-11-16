@@ -36,8 +36,6 @@ public class OperateurServiceImplTest {
 
     @InjectMocks
     private OperateurServiceImpl operateurService;
-
-
     private Operateur o1;
     private Facture f1 ;
     private List<Facture> listFacture = new ArrayList<>();

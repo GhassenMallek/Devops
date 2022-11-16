@@ -1,14 +1,17 @@
 package com.esprit.examen.services.impl;
 
-import com.esprit.examen.entities.Reglement;
-import com.esprit.examen.entities.dto.ReglementDTO;
-import com.esprit.examen.repositories.ReglementRepository;
-import com.esprit.examen.services.IReglementService;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import com.esprit.examen.entities.Reglement;
+import com.esprit.examen.entities.dto.ReglementDTO;
+import com.esprit.examen.repositories.FactureRepository;
+import com.esprit.examen.repositories.ReglementRepository;
+import com.esprit.examen.services.IReglementService;
+
 
 @Service
 public class ReglementServiceImpl implements IReglementService {
