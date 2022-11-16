@@ -32,6 +32,7 @@ import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.StockRepository;
 
 
+
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceImplTest {
@@ -82,7 +83,6 @@ public class ProductServiceImplTest {
 		assertThat(pnew.getIdProduit()).isZero();
 	}
 
-
 	@Test
 	public void getProduits() {
 		init();
@@ -121,7 +121,8 @@ public class ProductServiceImplTest {
 		assertEquals("Fantacy", exisitingProduit.getLibelleProduit());
 	}
 	@Test
-	public void assignProduitToStockTruecondion() {
+
+	public void assignProduitToStockTruecondion() { 
 		init();
 		assertThat(p3).isNull();
 		when(produitRepository.findById(anyLong())).thenReturn(null);
@@ -132,10 +133,10 @@ public class ProductServiceImplTest {
 		assertThat(p1.getStock().getIdStock()).isEqualTo(s1.getIdStock());
 	}
 	@Test
-	public void assignProduitToStockFalsecondion() {
+	public void assignProduitToStockFalsecondion() { 
 		init();
 		assertThat(p3).isNull();
-
+		
 	}
 
 	@Test
@@ -149,4 +150,5 @@ public class ProductServiceImplTest {
 
 	}
 
+	
 }

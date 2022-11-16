@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.esprit.examen.services.IProduitService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,7 @@ import com.esprit.examen.entities.dto.ProduitDTO;
 import com.esprit.examen.repositories.CategorieProduitRepository;
 import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.StockRepository;
+import com.esprit.examen.services.IProduitService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +41,8 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Transactional
 	public Produit addProduit(ProduitDTO p) {
-		return	produitRepository.save(Produit.builder()
+
+	return	produitRepository.save(Produit.builder()
 				.codeProduit(p.getCodeProduit())
 				.libelleProduit(p.getCodeProduit())
 				.prix(p.getPrix())
@@ -50,7 +52,7 @@ public class ProduitServiceImpl implements IProduitService {
 				.detailFacture(p.getDetailFacture())
 				.categorieProduit(p.getCategorieProduit())
 				.build()
-		);
+				);
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class ProduitServiceImpl implements IProduitService {
 				.detailFacture(p.getDetailFacture())
 				.categorieProduit(p.getCategorieProduit())
 				.build()
-		);
+				);
 	}
 
 	@Override
@@ -82,14 +84,14 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public void assignProduitToStock(Long idProduit, Long idStock) {
-
-		Optional<Produit>  produit = produitRepository.findById(idProduit);
-		if (produit.isPresent()) {
-			Stock stock = stockRepository.findById(idStock).orElse(null);
-			produit.get().setStock(stock);
-			produitRepository.save(produit.get());
-		}
-
+			Optional<Produit>  produit = produitRepository.findById(idProduit);
+			Optional<Stock> stock = stockRepository.findById(idStock);
+			if (produit.isPresent() && stock.isPresent()) {
+				produit.get().setStock(stock.get());
+				produitRepository.save(produit.get());
+				
+			}
+			
 
 	}
 

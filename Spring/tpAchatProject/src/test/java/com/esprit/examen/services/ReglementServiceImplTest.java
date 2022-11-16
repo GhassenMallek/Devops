@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -23,9 +24,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.esprit.examen.entities.Facture;
+
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.entities.dto.ReglementDTO;
 import com.esprit.examen.repositories.ReglementRepository;
+import com.esprit.examen.services.impl.ReglementServiceImpl;
 
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)
@@ -59,7 +62,6 @@ public class ReglementServiceImplTest {
 		this.modelMapper = new ModelMapper();
 	}
 
-
 	@Test
 	public void addReglementTest() {
 		init();
@@ -86,7 +88,6 @@ public class ReglementServiceImplTest {
 	public void retrieveReglementByFacture() {
 		this.f1 = new Facture();
 		this.f1.setIdFacture(1L);
-
 		this.r2 = new Reglement();
 		this.r2.setIdReglement(2L);
 		this.r2.setFacture(f1);
@@ -94,7 +95,6 @@ public class ReglementServiceImplTest {
 		this.r3.setIdReglement(3L);
 		this.r3.setFacture(f1);
 		this.modelMapper = new ModelMapper();
-
 		System.out.println("hello ghassef " + r2.getFacture().toString()+ " " + r3.getFacture().toString());
 		List<Reglement> Reglements = reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture());
 		System.out.println(reglementServiceImpl.retrieveReglementByFacture(f1.getIdFacture()));
@@ -113,13 +113,13 @@ public class ReglementServiceImplTest {
 		assertThat(existingProduit.getIdReglement()).isNotNull();
 
 	}
-
+	
 	@Test
 	public void getChiffreAffaireEntreDeuxDate() {
-		init();
-		when(reglementServiceImpl.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).thenReturn(r1.getMontantPaye());
-		assertThat(reglementServiceImpl.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).isEqualTo(100f);
+	init();
+	when(reglementServiceImpl.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).thenReturn(r1.getMontantPaye());
+	assertThat(reglementServiceImpl.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).isEqualTo(100f);
 
-	}
+}
 
 }
