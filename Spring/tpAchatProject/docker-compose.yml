@@ -10,8 +10,6 @@ services:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - 3306:3306
-    volumes:
-      - db:/var/lib/mysql
   app:
     depends_on:
       - mysqldb
@@ -31,9 +29,13 @@ services:
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
     volumes:
-      - .m2:/root/.m2
+      - .m2:/home/.m2
     stdin_open: true
     tty: true
-
-volumes:
-  db:
+  front:
+    depends_on:
+      - app
+    build: 
+      context: ../../Angular/crud-tuto-front/
+    ports:
+      - "4201:4201"
