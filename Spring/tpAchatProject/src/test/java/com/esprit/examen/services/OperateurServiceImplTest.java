@@ -16,12 +16,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -38,8 +36,6 @@ public class OperateurServiceImplTest {
 
     @InjectMocks
     private OperateurServiceImpl operateurService;
-
-
     private Operateur o1;
     private Facture f1 ;
     private List<Facture> listFacture = new ArrayList<>();
