@@ -1,6 +1,7 @@
 package com.esprit.examen.services;
 
 import com.esprit.examen.entities.Stock;
+import com.esprit.examen.services.impl.StockServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class StockServiceImplJunitTest {
     @Autowired
-    IStockService stockService;
+    StockServiceImpl stockService;
 
     @Test
     public void addStock(){
