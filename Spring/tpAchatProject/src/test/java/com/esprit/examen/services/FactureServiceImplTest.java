@@ -10,6 +10,7 @@ import com.esprit.examen.services.impl.FactureServiceImpl;
 import com.esprit.examen.services.impl.FournisseurServiceImpl;
 import com.esprit.examen.services.impl.OperateurServiceImpl;
 import com.esprit.examen.services.impl.ReglementServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,7 @@ import java.util.*;
 import org.junit.Test;
 
 @RunWith(SpringRunner.class)
+@Slf4j
 @ExtendWith(MockitoExtension.class)
 public class FactureServiceImplTest {
     @Mock
@@ -96,17 +98,20 @@ public class FactureServiceImplTest {
     @Test
     @DisplayName("Test Add Facture")
     public void testAddFacture() {
+        log.info("entry function : testAddFacture");
         init();
         when(factureRepository.save(any(Facture.class))).thenReturn(f1);
         FactureDTO frm=modelMapper.map(f1, FactureDTO.class);
         Facture fnew=factureService.addFacture(frm);
         assertNotNull(fnew);
         assertThat(fnew.getMontantFacture()).isEqualTo(100);
+        log.info("exit function : testAddFacture");
     }
 
     @Test
     @DisplayName("Test Retrieve All Facture")
     public void testRetrieveAllFactures() {
+        log.info("entry function : testAddFacture");
         init();
         List<Facture> list = new ArrayList<>();
         list.add(f1);
@@ -115,11 +120,13 @@ public class FactureServiceImplTest {
         List<Facture> factures = factureService.retrieveAllFactures();
         assertEquals(2, factures.size());
         assertNotNull(factures);
+        log.info("exit function : testAddFacture");
     }
 
     @Test
     @DisplayName("Test Get Facture by id")
     public void testGetFactureById(){
+        log.info("entry function : testGetFactureById");
         init();
         when(factureRepository.save(any(Facture.class))).thenReturn(f1);
         FactureDTO fdto = modelMapper.map(f1, FactureDTO.class);
@@ -128,22 +135,26 @@ public class FactureServiceImplTest {
         Facture existingFacture = factureService.retrieveFacture(fnew.getIdFacture());
         assertNotNull(existingFacture);
         assertThat(existingFacture.getIdFacture()).isNotNull();
+        log.info("exit function : testGetFactureById");
     }
 
     @Test
     @DisplayName("Test Cancel Facutre")
     public void testCancelFacture(){
+        log.info("entry function : testCancelFacture");
         init();
         Long FactureId = 0L;
         when(factureRepository.findById(FactureId)).thenReturn(Optional.of(f1));
         assertThat(f1.getArchivee()).isFalse();
         factureService.cancelFacture(FactureId);
         assertThat(f1.getArchivee()).isTrue();
+        log.info("exit function : testCancelFacture");
     }
 
     @Test
     @DisplayName("Test Get Facture By Fournisseur")
     public void testGetFacturesByFournisseur(){
+        log.info("entry function : testGetFacturesByFournisseur");
         init();
         Set<Facture> list = new HashSet<>();
         list.add(f1);
@@ -151,10 +162,12 @@ public class FactureServiceImplTest {
         fournisseur.setFactures(list);
         factureService.getFacturesByFournisseur(fournisseur.getIdFournisseur());
         assertThat(fournisseur.getFactures()).hasSize(2);
+        log.info("exit function : testGetFacturesByFournisseur");
     }
     @Test
     @DisplayName("Test Assign Operateur To Facture")
     public void testAssignOperateurToFacture() {
+        log.info("entry function : testAssignOperateurToFacture");
         init();
         when(factureRepository.findById(anyLong())).thenReturn(Optional.of(f1));
         assertThat(f1.getIdFacture()).isZero();
@@ -163,14 +176,17 @@ public class FactureServiceImplTest {
         o1.setFactures(list);
         factureService.assignOperateurToFacture(o1.getIdOperateur(), f1.getIdFacture());
         assertThat(o1.getFactures()).hasSize(1);
+        log.info("exit function : testAssignOperateurToFacture");
     }
 
     @Test
     @DisplayName("Test Pourcentage Recouverment")
     public void testPourcentageRecouvrement() {
+        log.info("entry function : testPourcentageRecouvrement");
         init();
         when(factureRepository.getTotalFacturesEntreDeuxDates(new Date(2022, 11, 11),new Date(2022, 11, 24))).thenReturn(8.0f);
         when(reglementRepository.getChiffreAffaireEntreDeuxDate(new Date(2022, 11, 11),new Date(2022, 11, 24))).thenReturn(2.0f);
         assertThat(factureService.pourcentageRecouvrement(new Date(2022, 11, 11),new Date(2022, 11, 24))).isEqualTo(25.0f);
+        log.info("exit function : testPourcentageRecouvrement");
     }
 }
