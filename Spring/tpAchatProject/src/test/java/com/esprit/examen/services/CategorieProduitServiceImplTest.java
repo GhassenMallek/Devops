@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,6 +29,7 @@ import com.esprit.examen.entities.dto.CategorieProduitDTO;
 import com.esprit.examen.repositories.CategorieProduitRepository;
 import com.esprit.examen.services.impl.CategorieProduitServiceImpl;
 @RunWith(SpringRunner.class)
+@Slf4j
 @ExtendWith(MockitoExtension.class)
 public class CategorieProduitServiceImplTest {
 	@Mock
@@ -38,7 +40,7 @@ public class CategorieProduitServiceImplTest {
 	private CategorieProduit cp1;
 	private CategorieProduit cp2;
 	ModelMapper modelMapper;
-	
+
 	@BeforeEach
 	public void init() {
 		this.cp1 = new CategorieProduit();
@@ -53,15 +55,18 @@ public class CategorieProduitServiceImplTest {
 	}
 	@Test
 	public void testAddcategorieProduit() {
+		log.info("entry function : testAddcategorieProduit");
 		init();
 		when(categorieProduitRepository.save(any(CategorieProduit.class))).thenReturn(cp1);
 		CategorieProduitDTO cprm=modelMapper.map(cp1, CategorieProduitDTO.class);
 		CategorieProduit pnew=categorieProduitServiceImpl.addCategorieProduit(cprm);
 		assertNotNull(pnew);
 		assertThat(pnew.getIdCategorieProduit()).isEqualTo(1L);
+		log.info("exit function : testAddcategorieProduit");
 	}
 	@Test
 	public void getCategorieProduits() {
+		log.info("entry function : getCategorieProduits");
 		init();
 		List<CategorieProduit> list = new ArrayList<>();
 		list.add(cp1);
@@ -70,10 +75,12 @@ public class CategorieProduitServiceImplTest {
 		List<CategorieProduit> Produits = categorieProduitServiceImpl.retrieveAllCategorieProduits();
 		assertEquals(2, Produits.size());
 		assertNotNull(Produits);
+		log.info("exit function : getCategorieProduits");
 	}
-	
+
 	@Test
 	public void getCategorieProduitsById() {
+		log.info("entry function : getCategorieProduitsById");
 		init();
 		when(categorieProduitRepository.save(any(CategorieProduit.class))).thenReturn(cp1);
 		CategorieProduitDTO prm=modelMapper.map(cp1, CategorieProduitDTO.class);
@@ -82,29 +89,31 @@ public class CategorieProduitServiceImplTest {
 		CategorieProduit existingProduit = categorieProduitServiceImpl.retrieveCategorieProduit(pnew.getIdCategorieProduit());
 		assertNotNull(existingProduit);
 		assertThat(existingProduit.getIdCategorieProduit()).isNotNull();
+		log.info("exit function : getCategorieProduitsById");
 	}
 	@Test
 	public void updateCategorieProduit() {
+		log.info("entry function : updateCategorieProduit");
 		init();
 		when(categorieProduitRepository.findById(anyLong())).thenReturn(Optional.of(cp1));
-		
 		when(categorieProduitRepository.save(any(CategorieProduit.class))).thenReturn(cp1);
 		cp1.setCodeCategorie("Fantacy");
 		CategorieProduitDTO prm=modelMapper.map(cp1, CategorieProduitDTO.class);
 		CategorieProduit exisitingProduit = categorieProduitServiceImpl.updateCategorieProduit(prm);
-		
 		assertNotNull(exisitingProduit);
 		assertEquals("Fantacy", exisitingProduit.getCodeCategorie());
+		log.info("exit function : updateCategorieProduit");
 	}
 	@Test
 	public void deleteCategorieProduit() {
+		log.info("entry function : deleteCategorieProduit");
 		init();
 		Long ProduitId = 1L;
 		when(categorieProduitRepository.findById(anyLong())).thenReturn(Optional.of(cp1));
 		doNothing().when(categorieProduitRepository).deleteById(anyLong());
 		categorieProduitServiceImpl.deleteCategorieProduit(ProduitId);
 		verify(categorieProduitRepository, times(1)).deleteById(anyLong());
-		
+		log.info("exit function : deleteCategorieProduit");
 	}
-	
+
 }
