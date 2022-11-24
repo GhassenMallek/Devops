@@ -39,7 +39,7 @@
                 stage('Building Docker Image') {
                     steps {
                         dir('Spring/tpAchatProject'){
-                            sh 'docker build -t mounah/tpachat .'
+                            sh 'docker build -t **/tpachat .'
                                 }
                             }
                         }
