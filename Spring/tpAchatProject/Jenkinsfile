@@ -57,29 +57,29 @@
                      stage('Building Docker Image Angular') {
                            steps {
                                dir('Angular/crud-tuto-front') {
-                            sh 'docker build -t mounah/tpachatfront .'
+                            sh 'docker build -t **/tpachatfront .'
                        }
                    }
                 }
                 stage('Building Docker Image') {
                     steps {
                         dir('Spring/tpAchatProject'){
-                            sh 'docker build -t mounah/tpachat .'
+                            sh 'docker build -t **/tpachat .'
                                 }
                             }
                         }
                 stage('Login to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker login -u mounah -p 123'
+                            sh 'docker login -u ** -p **'
                             }
                         }
                     }
                 stage('Push to DockerHub') {
                     steps{
                         dir('Spring/tpAchatProject'){
-                            sh 'docker push mounah/tpachat'
-                                sh 'docker push mounah/tpachatfront'
+                            sh 'docker push **/tpachat'
+                                sh 'docker push **/tpachatfront'
                              }
                         }
                     }
